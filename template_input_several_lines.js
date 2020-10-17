@@ -9,7 +9,7 @@ const main = () => {
     });
     let input = [];
     rl.on('line', (line) => {
-        data.push(line);
+        input.push(line.split(" ").map(x => Number(x)));
     });
     rl.on('close', () => {
         console.log(solve(input));
