@@ -1,14 +1,12 @@
-const solve = () => {
-};
+const solve = () => { };
 
 const main = () => {
     const readline = require('readline');
     const rl = readline.createInterface({
         input: process.stdin,
-        output: process.stdout,
-        terminal: false
+        output: process.stdout
     });
-    rl.on('line', function (line) {
+    rl.on('line', (line) => {
         console.log(solve(line));
     });
 };
