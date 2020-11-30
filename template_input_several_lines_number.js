@@ -13,7 +13,7 @@ const main = () => {
         input.push(Number(line));
     });
     rl.on('close', () => {
-        let t = Number(input[0]);
+        let t = input[0];
         let i = 1;
         while (t > 0) {
             let data = input[i];
