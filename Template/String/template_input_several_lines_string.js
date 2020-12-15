@@ -15,10 +15,9 @@ const main = () => {
     rl.on('close', () => {
         let t = Number(input[0]);  // be careful this t
         let i = 1;
-        while (t > 0) {
+        while (t--) {
             let data = input.slice(i, i + 1);
             solve(data[0]);
-            t--;
             i++;
         }
     });
