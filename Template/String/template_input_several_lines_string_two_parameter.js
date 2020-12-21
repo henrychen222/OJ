@@ -1,5 +1,5 @@
-// 10/27/20 morning
-const solve = () => {
+// 12.20 morning
+const solve = (n, s) => {
 };
 
 const main = () => {
@@ -13,11 +13,11 @@ const main = () => {
         input.push(line);
     });
     rl.on('close', () => {
-        let t = Number(input[0]);  // be careful this t
+        let t = Number(input[0]);
         let i = 1;
         while (t--) {
-            solve(input[i]);
-            i++;
+            solve(input[i], input[i + 1]); // n s
+            i += 2;
         }
     });
 };
