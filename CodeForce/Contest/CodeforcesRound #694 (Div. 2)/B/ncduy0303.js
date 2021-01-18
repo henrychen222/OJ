@@ -30,9 +30,9 @@ const main = () => {
         let t = input[0][0];
         let i = 1;
         while (t--) {
-            // let data = input.slice(i, i + 2);
-            // solve(data[0][0], data[0][1], data[1]);
-            solve(input[i][0], input[i][1], input[i + 1]);
+            let data = input.slice(i, i + 2);
+            solve(data[0][0], data[0][1], data[1]);
+            // solve(input[i][0], input[i][1], input[i + 1]); // Accepted --- 514ms https://codeforces.com/contest/1471/submission/104637413
             i += 2;
         }
     });
@@ -70,6 +70,7 @@ main()
 //         while (t--) {
 //             let data = input.slice(i, i + 2);
 //             solve(data[0][0][0], data[0][1][0], data[1]);
+//             // solve(input[i][0][0], input[i][1][0], input[i + 1]) // Accepted --- 779ms https://codeforces.com/contest/1471/submission/104639790
 //             i += 2;
 //         }
 //     });
