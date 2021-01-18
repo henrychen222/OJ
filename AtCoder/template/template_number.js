@@ -1,4 +1,4 @@
-// 11/24/20 morning
+// 1.2 night
 const solve = (num) => {
 };
 
@@ -8,17 +8,8 @@ const main = () => {
         input: process.stdin,
         output: process.stdout
     });
-    let input = [];
     rl.on('line', (line) => {
-        input.push(Number(line));
-    });
-    rl.on('close', () => {
-        let t = input[0];
-        let i = 1;
-        while (t--) {
-            solve(input[i]);
-            i++;
-        }
+        solve(Number(line));
     });
 };
 

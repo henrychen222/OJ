@@ -1,5 +1,17 @@
-// 10.17 morning
-const solve = (num) => {
+/**
+ * 12.30 morning
+ * https://codeforces.com/contest/1466/problem/0
+ */
+
+const solve = (n, a) => {
+    let set = new Set();
+    for (let i = 0; i < n; i++) {
+        for (let j = i + 1; j < n; j++) {
+            let diff = a[j] - a[i];
+            set.add(diff);
+        }
+    }
+    console.log(set.size);
 };
 
 const main = () => {
@@ -16,9 +28,9 @@ const main = () => {
         let t = input[0][0];
         let i = 1;
         while (t--) {
-            solve(input[i][0]);
-            // console.log('Case #' + cnt + ': ' + solve(input[i][0])); for kickstart
-            i++;
+            let data = input.slice(i, i + 2);
+            solve(data[0][0], data[1]);
+            i += 2;
         }
     });
 };

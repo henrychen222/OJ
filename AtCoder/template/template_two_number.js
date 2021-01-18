@@ -1,5 +1,5 @@
-// 10.17 morning
-const solve = (num) => {
+// 1.2 night
+const solve = (a, b) => {
 };
 
 const main = () => {
@@ -11,15 +11,10 @@ const main = () => {
     let input = [];
     rl.on('line', (line) => {
         input.push(line.split(" ").map(x => Number(x)));
+        // input.push(line.split(" ").map(x => BigInt(x)));
     });
     rl.on('close', () => {
-        let t = input[0][0];
-        let i = 1;
-        while (t--) {
-            solve(input[i][0]);
-            // console.log('Case #' + cnt + ': ' + solve(input[i][0])); for kickstart
-            i++;
-        }
+        solve(input[0][0], input[0][1]);
     });
 };
 

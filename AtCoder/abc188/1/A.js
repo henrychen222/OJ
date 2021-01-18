@@ -1,5 +1,14 @@
-// 10.17 morning
-const solve = (num) => {
+/**
+ * 1.10 morning
+ * https://atcoder.jp/contests/abc188/tasks/abc188_a
+ */
+
+// Accepted
+const solve = (x, y) => {
+    let behind = Math.min(x, y);
+    let lead = Math.max(x, y);
+    if (behind + 3 > lead) return console.log('Yes')
+    console.log('No');
 };
 
 const main = () => {
@@ -13,13 +22,7 @@ const main = () => {
         input.push(line.split(" ").map(x => Number(x)));
     });
     rl.on('close', () => {
-        let t = input[0][0];
-        let i = 1;
-        while (t--) {
-            solve(input[i][0]);
-            // console.log('Case #' + cnt + ': ' + solve(input[i][0])); for kickstart
-            i++;
-        }
+        solve(input[0][0], input[0][1]);
     });
 };
 

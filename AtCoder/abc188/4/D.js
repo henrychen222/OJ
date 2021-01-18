@@ -1,5 +1,17 @@
-// 10.17 morning
-const solve = (num) => {
+/**
+ * 1.10 morning
+ * https://atcoder.jp/contests/abc188/tasks/abc188_d
+ */
+
+// don't understand
+const solve = (n, c, arr) => {
+    console.log(n, c, arr);
+    let res = 0;
+    for (const e of arr) {
+        let a = arr[0];
+        let b = arr[1];
+        let c = arr[2];
+    }
 };
 
 const main = () => {
@@ -13,13 +25,7 @@ const main = () => {
         input.push(line.split(" ").map(x => Number(x)));
     });
     rl.on('close', () => {
-        let t = input[0][0];
-        let i = 1;
-        while (t--) {
-            solve(input[i][0]);
-            // console.log('Case #' + cnt + ': ' + solve(input[i][0])); for kickstart
-            i++;
-        }
+        solve(input[0][0], input[0][1], input.slice(1));
     });
 };
 

@@ -1,5 +1,12 @@
-// 10.17 morning
-const solve = (num) => {
+/**
+ * 1.9 morning
+ * https://atcoder.jp/contests/arc111/tasks/arc111_a
+ */
+
+// WA
+const solve = (N, M) => {
+    let tmp = Math.floor(10 ** N / M) % M;
+    console.log(tmp);
 };
 
 const main = () => {
@@ -13,13 +20,7 @@ const main = () => {
         input.push(line.split(" ").map(x => Number(x)));
     });
     rl.on('close', () => {
-        let t = input[0][0];
-        let i = 1;
-        while (t--) {
-            solve(input[i][0]);
-            // console.log('Case #' + cnt + ': ' + solve(input[i][0])); for kickstart
-            i++;
-        }
+        solve(input[0][0], input[0][1]);
     });
 };
 

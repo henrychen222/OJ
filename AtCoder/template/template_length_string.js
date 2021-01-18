@@ -1,5 +1,5 @@
-// 11/24/20 morning
-const solve = (n, arr) => {
+// 1.2 night
+const solve = (n, s) => {
 };
 
 const main = () => {
@@ -10,15 +10,10 @@ const main = () => {
     });
     let input = [];
     rl.on('line', (line) => {
-        input.push(line.split(" ").map(x => Number(x)));
+        input.push(line);
     });
     rl.on('close', () => {
-        let t = input[0][0];
-        let i = 1;
-        while (t--) {
-            solve(input[i][0], input[i + 1]); // n arr
-            i += 2;
-        }
+        solve(Number(input[0]), input[1]);
     });
 };
 

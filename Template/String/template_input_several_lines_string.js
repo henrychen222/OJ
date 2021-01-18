@@ -1,5 +1,5 @@
 // 10/27/20 morning
-const solve = () => {
+const solve = (s) => {
 };
 
 const main = () => {
