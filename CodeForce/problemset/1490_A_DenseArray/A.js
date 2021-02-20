@@ -1,14 +1,27 @@
+/**
+ * 02/19/21 morning
+ * https://codeforces.com/contest/1490/problem/A
+ */
+
 ///////////////////////////////// pre-define /////////////////////////////////////
 const pr = console.log;
 const mi = Math.min;
 const mx = Math.max;
-const abs = Math.abs;
-const fl = Math.floor;
-const ce = Math.ceil;
-const sq = Math.sqrt;
 ///////////////////////////////////////////////////////////////////////////////////
 
-const solve = (n, m, a) => {
+// Accepted --- 93ms https://codeforces.com/contest/1490/submission/107962626
+const solve = (n, a) => {
+    // pr(n, a);
+    let res = 0;
+    for (let i = 0; i + 1 < n; i++) {
+        let min = mi(a[i], a[i + 1]);
+        let max = mx(a[i], a[i + 1]);
+        while (max > min && max / min > 2) {
+            max = Math.ceil(max / 2);
+            res++;
+        }
+    }
+    pr(res);
 };
 
 const main = () => {
@@ -25,10 +38,8 @@ const main = () => {
         let t = input[0][0];
         let i = 1;
         while (t--) {
-            let n = input[i][0];
-            let m = input[i][1];
-            solve(n, m, input.slice(i + 1, i + m + 1));
-            i += m + 1;
+            solve(input[i][0], input[i + 1]);
+            i += 2;
         }
     });
 };

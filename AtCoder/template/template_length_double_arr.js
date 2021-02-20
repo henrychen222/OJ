@@ -8,7 +8,8 @@ const ce = Math.ceil;
 const sq = Math.sqrt;
 ///////////////////////////////////////////////////////////////////////////////////
 
-const solve = () => { };
+const solve = (n, da) => {
+};
 
 const main = () => {
     const readline = require('readline');
@@ -16,8 +17,13 @@ const main = () => {
         input: process.stdin,
         output: process.stdout
     });
+    let input = [];
     rl.on('line', (line) => {
-        console.log(solve(line));
+        input.push(line.split(" ").map(x => Number(x)));
+        // input.push(line.split(" ").map(x => BigInt(x)));
+    });
+    rl.on('close', () => {
+        solve(input[0][0], input.slice(1));
     });
 };
 
