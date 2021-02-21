@@ -1,56 +1,51 @@
-// 02/19/21 morning and afternoon
-// don't know how to run in local, only use custom test in cf
-
-package CodeForce.problemset.A_1490_DenseArray;
+// 02/21/21 morning
+package AtCoder.arc113.B;
 
 import java.util.*;
 import java.io.*;
 import static java.lang.System.out;
 
-public class A {
-	// Accepted --- 124ms https://codeforces.com/contest/1490/submission/107974255
-	void solve1(int n, int[] a) {
-		int res = 0;
-		for (int i = 0; i + 1 < n; i++) {
-			int min = Math.min(a[i], a[i + 1]);
-			int max = Math.max(a[i], a[i + 1]);
-			while (max > min && max / (double) min > 2) {
-				if (max % 2 == 0) {
-					max /= 2;
-				} else {
-					max = max / 2 + 1;
-				}
-				res++;
-			}
+// From LayCurse
+public class Main {
+
+	// Accepted --- 79ms https://atcoder.jp/contests/arc113/submissions/20405020
+	void solve(long a, long b, long c) {
+		long k, res;
+		// prnl(powL(b, c));
+		if (powL(b, c) > 10) {
+			k = powmod(b, c, 4) + 4;
+		} else {
+			k = powL(b, c);
 		}
-		prni(res);
+		res = powmod(a, k, 10);
+		prnl(res);
 	}
 
-	void solve(int n, int[] a) {
-		int res = 0;
-		for (int i = 0; i + 1 < n; i++) {
-			int min = Math.min(a[i], a[i + 1]);
-			int max = Math.max(a[i], a[i + 1]);
-			while (max > min && max / (double) min > 2) {
-				max = (int) Math.ceil((max / (double) 2));
-				res++;
-			}
+	long powL(long a, long b) {
+		return (long) Math.pow(a, b);
+	};
+
+	long powmod(long a, long b, long mod) {
+		long r = 1;
+		while (b > 0) {
+			if ((b & 1) == 1)
+				r = r * a % mod;
+			b >>= 1;
+			a = a * a % mod;
 		}
-		prni(res);
-	}
-	
+		return r;
+	};
+
 	private void run() {
 		FastScanner fs = new FastScanner();
-		int t = fs.nextInt();
-		while (t-- > 0) {
-			int n = fs.nextInt();
-			int[] a = fs.readArray(n);
-			solve(n, a);
-		}
+		long a = fs.nextLong();
+		long b = fs.nextLong();
+		long c = fs.nextLong();
+		solve(a, b, c);
 	}
 
 	public static void main(String[] args) {
-		new A().run();
+		new Main().run();
 	}
 
 	void prni(int num) {

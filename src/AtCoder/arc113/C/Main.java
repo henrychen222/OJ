@@ -1,56 +1,51 @@
-// 02/19/21 morning and afternoon
-// don't know how to run in local, only use custom test in cf
-
-package CodeForce.problemset.A_1490_DenseArray;
+/**
+ * 02/21/21 morning
+ * https://atcoder.jp/contests/arc113/tasks/arc113_c
+ */
+package AtCoder.arc113.C;
 
 import java.util.*;
 import java.io.*;
 import static java.lang.System.out;
 
-public class A {
-	// Accepted --- 124ms https://codeforces.com/contest/1490/submission/107974255
-	void solve1(int n, int[] a) {
+class Main {
+
+	// TLE: algorithm is correct
+	void solve(String s) {
+		int n = s.length();
+		List<Integer> repeat = new ArrayList<>();
+		char[] a = s.toCharArray();
+		for (int i = 1; i < n - 1; i++) {
+			if (a[i - 1] == a[i] && a[i] != a[i + 1]) {
+				repeat.add(i - 1);
+			}
+		}
+		int nr = repeat.size();
 		int res = 0;
-		for (int i = 0; i + 1 < n; i++) {
-			int min = Math.min(a[i], a[i + 1]);
-			int max = Math.max(a[i], a[i + 1]);
-			while (max > min && max / (double) min > 2) {
-				if (max % 2 == 0) {
-					max /= 2;
-				} else {
-					max = max / 2 + 1;
-				}
-				res++;
+		for (int i = nr - 1; i >= 0; i--) {
+			int cnt = 0;
+			int idx = repeat.get(i);
+			for (int j = idx; j < n; j++) {
+				if (a[idx] == a[j])
+					continue;
+				cnt++;
+			}
+			res += cnt;
+			for (int k = idx + 2; k < n; k++) {
+				a[k] = a[idx];
 			}
 		}
 		prni(res);
 	}
 
-	void solve(int n, int[] a) {
-		int res = 0;
-		for (int i = 0; i + 1 < n; i++) {
-			int min = Math.min(a[i], a[i + 1]);
-			int max = Math.max(a[i], a[i + 1]);
-			while (max > min && max / (double) min > 2) {
-				max = (int) Math.ceil((max / (double) 2));
-				res++;
-			}
-		}
-		prni(res);
-	}
-	
 	private void run() {
 		FastScanner fs = new FastScanner();
-		int t = fs.nextInt();
-		while (t-- > 0) {
-			int n = fs.nextInt();
-			int[] a = fs.readArray(n);
-			solve(n, a);
-		}
+		String s = fs.next();
+		solve(s);
 	}
 
 	public static void main(String[] args) {
-		new A().run();
+		new Main().run();
 	}
 
 	void prni(int num) {

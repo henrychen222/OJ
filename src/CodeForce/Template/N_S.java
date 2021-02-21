@@ -1,46 +1,26 @@
-// 02/19/21 morning and afternoon
-
-package CodeForce.problemset.A_1490_DenseArray;
+package CodeForce.Template;
 
 import java.util.*;
+import java.io.*;
 import static java.lang.System.out;
 
-public class A_scanner_test {
+public class N_S {
 
-	// Accepted --- 171ms https://codeforces.com/contest/1490/submission/107974901
-	void solve(int n, int[] a) {
-		int res = 0;
-		for (int i = 0; i + 1 < n; i++) {
-			int min = Math.min(a[i], a[i + 1]);
-			int max = Math.max(a[i], a[i + 1]);
-			while (max > min && max / (double) min > 2) {
-				if (max % 2 == 0) {
-					max /= 2;
-				} else {
-					max = max / 2 + 1;
-				}
-				res++;
-			}
-		}
-		prni(res);
+	void solve(int n, String s) {
 	}
 
-	private void run() { // Scanner is slower than FastScanner in BufferedReader (Don't use)
-		Scanner sc = new Scanner(System.in);
-		int t = sc.nextInt();
+	private void run() {
+		FastScanner fs = new FastScanner();
+		int t = fs.nextInt();
 		while (t-- > 0) {
-			int n = sc.nextInt();
-			int[] a = new int[n];
-			for (int i = 0; i < n; i++) {
-				a[i] = sc.nextInt();
-			}
-			solve(n, a);
+			int n = fs.nextInt();
+			String s = fs.next();
+			solve(n, s);
 		}
-		sc.close();
 	}
 
 	public static void main(String[] args) {
-		new A_scanner_test().run();
+		new N_S().run();
 	}
 
 	void prni(int num) {
@@ -121,5 +101,35 @@ public class A_scanner_test {
 
 	void prlc(List<Character> l) {
 		out.println(l);
+	}
+
+	class FastScanner {
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		StringTokenizer st = new StringTokenizer("");
+
+		String next() {
+			while (!st.hasMoreTokens())
+				try {
+					st = new StringTokenizer(br.readLine());
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			return st.nextToken();
+		}
+
+		int nextInt() {
+			return Integer.parseInt(next());
+		}
+
+		int[] readArray(int n) {
+			int[] a = new int[n];
+			for (int i = 0; i < n; i++)
+				a[i] = nextInt();
+			return a;
+		}
+
+		long nextLong() {
+			return Long.parseLong(next());
+		}
 	}
 }

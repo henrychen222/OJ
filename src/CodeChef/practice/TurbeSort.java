@@ -1,27 +1,29 @@
-package Template;
+// 02/20/21 evening
+package CodeChef.practice;
 
 import java.util.*;
-import java.math.*;
 import java.io.*;
 import static java.lang.System.out;
 
-public class N_Array {
+// Accepted --- 4.95 sec https://www.codechef.com/viewsolution/42923549
+class TurbeSort {
 
 	void solve(int n, int[] a) {
+		Arrays.sort(a);
+		for (int i = 0; i < n; i++) {
+			prni(a[i]);
+		}
 	}
 
 	private void run() {
 		FastScanner fs = new FastScanner();
-		int t = fs.nextInt();
-		while (t-- > 0) {
-			int n = fs.nextInt();
-			int[] a = fs.readArray(n);
-			solve(n, a);
-		}
+		int n = fs.nextInt();
+		int[] a = fs.readArray(n);
+		solve(n, a);
 	}
 
 	public static void main(String[] args) {
-		new N_Array().run();
+		new TurbeSort().run();
 	}
 
 	void prni(int num) {
