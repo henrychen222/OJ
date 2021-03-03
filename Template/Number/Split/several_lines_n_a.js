@@ -25,7 +25,7 @@ const main = () => {
         let t = input[0][0];
         let i = 1;
         while (t--) {
-            solve(input[i][0], input[i + 1]); // n arr
+            solve(input[i][0], input[i + 1]);
             i += 2;
         }
     });
