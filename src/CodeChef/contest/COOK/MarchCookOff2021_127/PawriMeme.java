@@ -1,72 +1,34 @@
 /**
- * 03/05/21 morning
- * https://www.codechef.com/MARCH21C/problems/SPACEARR
+ * 03/21/21 noon
+ * https://www.codechef.com/COOK127C/problems/PAWRI
  */
 
-package CodeChef.contest.MarchChallenge2021;
+package CodeChef.contest.COOK.MarchCookOff2021_127;
 
 import java.util.*;
 import java.io.*;
 import static java.lang.System.out;
 
-class SpaceArray {
+class PawriMeme {
 
-	// WA subtask 1 and 5 AC
-//	void solve(int n, int[] a) {
-//		int sum = 0;
-//		for (int e : a) {
-//			sum += e;
-//		}
-//		int end = a[0] + n - 1;
-//		int resSum = (a[0] + end) * (end - a[0] + 1) / 2;
-//		int diff = resSum - sum;
-//		if (diff % 2 == 0) {
-//			prs("Second");
-//		} else {
-//			prs("First");
-//		}
-//	}
-//
-//	private void run() {
-//		FastScanner fs = new FastScanner();
-//		int t = fs.nextInt();
-//		while (t-- > 0) {
-//			int n = fs.nextInt();
-//			int[] a = fs.readArray(n);
-//			solve(n, a);
-//		}
-//	}
-	 
-	// WA subtask 3 and 5 AC
-	void solve(int n, long[] a) {
-		long sum = 0;
-		for (long e : a) {
-			sum += e;
-		}
-		long resSum = (1 + n) * n / 2;
-		long diff = resSum - sum;
-		if (diff % 2 == 0) {
-			prs("Second");
-		} else {
-			prs("First");
-		}
+	// Accepted --- 0.24sec
+	void solve(String s) {
+		String[] a = s.split("party", -1);
+		// System.out.println(Arrays.toString(a));
+		prs(String.join("pawri", a));
 	}
 
 	private void run() {
 		FastScanner fs = new FastScanner();
 		int t = fs.nextInt();
 		while (t-- > 0) {
-			int n = fs.nextInt();
-			long[] a = new long[n];
-			for (int i = 0; i < n; i++) {
-				a[i] = fs.nextLong();
-			}
-			solve(n, a);
+			String s = fs.next();
+			solve(s);
 		}
 	}
 
 	public static void main(String[] args) {
-		new SpaceArray().run();
+		new PawriMeme().run();
 	}
 
 	void prni(int num) {

@@ -1,83 +1,72 @@
 /**
- * 03/04/21 night
- * https://www.codechef.com/MARCH21C/problems/GROUPS
+ * 03/05/21 morning
+ * https://www.codechef.com/MARCH21C/problems/SPACEARR
  */
 
-package CodeChef.contest.MarchChallenge2021;
+package CodeChef.contest.LONG.MarchChallenge2021;
 
 import java.util.*;
 import java.io.*;
 import static java.lang.System.out;
 
-class Groups {
+class SpaceArray {
 
-	// TLE
-//	void solve(String s) {
-//		int n = s.length();
-//		int res = 0;
-//		outer: for (int i = 0; i < n;) {
-//			if (s.charAt(i) == '1') {
-//				res++;
-//				for (int j = i + 1; j < n; j++) {
-//					if (s.charAt(j) == '0') {
-//						i = j;
-//						continue outer;
-//					}
-//				}
-//			}
-//			i++;
+	// WA subtask 1 and 5 AC
+//	void solve(int n, int[] a) {
+//		int sum = 0;
+//		for (int e : a) {
+//			sum += e;
 //		}
-//		prni(res);
-//	}
-
-	// RE
-//	void solve(String s) {
-//		int n = s.length();
-//		int res = 0;
-//		for (int i = 0; i < n; i++) {
-//			if (i == 0) {
-//				if (s.charAt(i) == '1') {
-//					if (s.charAt(i + 1) != '1')
-//						res++;
-//				}
-//			} else if (i == n - 1) {
-//				if (s.charAt(i) == '1') {
-//					if (s.charAt(i - 1) != '1')
-//						res++;
-//				}
-//			} else {
-//				if (s.charAt(i) == '1') {
-//					if (s.charAt(i - 1) != '1' && s.charAt(i + 1) != '1')
-//						res++;
-//				}
-//			}
+//		int end = a[0] + n - 1;
+//		int resSum = (a[0] + end) * (end - a[0] + 1) / 2;
+//		int diff = resSum - sum;
+//		if (diff % 2 == 0) {
+//			prs("Second");
+//		} else {
+//			prs("First");
 //		}
-//		prni(res);
 //	}
-
-	// Accepted 0.34sec
-	void solve(String s) {
-		int n = s.length();
-		String[] a = s.split("0");
-		// pras(a);
-		int res = 0;
-		for (String e : a) {
-			if (e.length() != 0) res++;
+//
+//	private void run() {
+//		FastScanner fs = new FastScanner();
+//		int t = fs.nextInt();
+//		while (t-- > 0) {
+//			int n = fs.nextInt();
+//			int[] a = fs.readArray(n);
+//			solve(n, a);
+//		}
+//	}
+	 
+	// WA subtask 3 and 5 AC
+	void solve(int n, long[] a) {
+		long sum = 0;
+		for (long e : a) {
+			sum += e;
 		}
-		prni(res);
+		long resSum = (1 + n) * n / 2;
+		long diff = resSum - sum;
+		if (diff % 2 == 0) {
+			prs("Second");
+		} else {
+			prs("First");
+		}
 	}
 
 	private void run() {
 		FastScanner fs = new FastScanner();
 		int t = fs.nextInt();
 		while (t-- > 0) {
-			String s = fs.next();
-			solve(s);
+			int n = fs.nextInt();
+			long[] a = new long[n];
+			for (int i = 0; i < n; i++) {
+				a[i] = fs.nextLong();
+			}
+			solve(n, a);
 		}
 	}
 
 	public static void main(String[] args) {
-		new Groups().run();
+		new SpaceArray().run();
 	}
 
 	void prni(int num) {

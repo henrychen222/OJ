@@ -1,42 +1,83 @@
-package CodeForce.Template;
+/**
+ * 03/04/21 night
+ * https://www.codechef.com/MARCH21C/problems/GROUPS
+ */
+
+package CodeChef.contest.LONG.MarchChallenge2021;
 
 import java.util.*;
 import java.io.*;
 import static java.lang.System.out;
 
-public class N_S {
+class Groups {
 
-	void solve(int n, String s) {
+	// TLE
+//	void solve(String s) {
+//		int n = s.length();
+//		int res = 0;
+//		outer: for (int i = 0; i < n;) {
+//			if (s.charAt(i) == '1') {
+//				res++;
+//				for (int j = i + 1; j < n; j++) {
+//					if (s.charAt(j) == '0') {
+//						i = j;
+//						continue outer;
+//					}
+//				}
+//			}
+//			i++;
+//		}
+//		prni(res);
+//	}
+
+	// RE
+//	void solve(String s) {
+//		int n = s.length();
+//		int res = 0;
+//		for (int i = 0; i < n; i++) {
+//			if (i == 0) {
+//				if (s.charAt(i) == '1') {
+//					if (s.charAt(i + 1) != '1')
+//						res++;
+//				}
+//			} else if (i == n - 1) {
+//				if (s.charAt(i) == '1') {
+//					if (s.charAt(i - 1) != '1')
+//						res++;
+//				}
+//			} else {
+//				if (s.charAt(i) == '1') {
+//					if (s.charAt(i - 1) != '1' && s.charAt(i + 1) != '1')
+//						res++;
+//				}
+//			}
+//		}
+//		prni(res);
+//	}
+
+	// Accepted 0.34sec
+	void solve(String s) {
+		int n = s.length();
+		String[] a = s.split("0");
+		// pras(a);
+		int res = 0;
+		for (String e : a) {
+			if (e.length() != 0) res++;
+		}
+		prni(res);
 	}
 
 	private void run() {
-		read_write_file(); // comment this before submission
 		FastScanner fs = new FastScanner();
 		int t = fs.nextInt();
 		while (t-- > 0) {
-			int n = fs.nextInt();
 			String s = fs.next();
-			solve(n, s);
-		}
-	}
-
-	private final String INPUT = "input.txt";
-	private final String OUTPUT = "output.txt";
-
-	void read_write_file() {
-		FileInputStream instream = null;
-		PrintStream outstream = null;
-		try {
-			instream = new FileInputStream(INPUT);
-			outstream = new PrintStream(new FileOutputStream(OUTPUT));
-			System.setIn(instream);
-			System.setOut(outstream);
-		} catch (Exception e) {
+			solve(s);
 		}
 	}
 
 	public static void main(String[] args) {
-		new N_S().run();
+		new Groups().run();
 	}
 
 	void prni(int num) {

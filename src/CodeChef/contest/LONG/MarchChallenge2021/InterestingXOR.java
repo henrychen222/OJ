@@ -10,7 +10,7 @@
    16
    1000000000
  */
-package CodeChef.contest.MarchChallenge2021;
+package CodeChef.contest.LONG.MarchChallenge2021;
 
 import java.util.*;
 import java.io.*;

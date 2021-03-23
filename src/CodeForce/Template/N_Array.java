@@ -10,12 +10,28 @@ public class N_Array {
 	}
 
 	private void run() {
+		read_write_file(); // comment this before submission
 		FastScanner fs = new FastScanner();
 		int t = fs.nextInt();
 		while (t-- > 0) {
 			int n = fs.nextInt();
 			int[] a = fs.readArray(n);
 			solve(n, a);
+		}
+	}
+
+	private final String INPUT = "input.txt";
+	private final String OUTPUT = "output.txt";
+
+	void read_write_file() {
+		FileInputStream instream = null;
+		PrintStream outstream = null;
+		try {
+			instream = new FileInputStream(INPUT);
+			outstream = new PrintStream(new FileOutputStream(OUTPUT));
+			System.setIn(instream);
+			System.setOut(outstream);
+		} catch (Exception e) {
 		}
 	}
 
