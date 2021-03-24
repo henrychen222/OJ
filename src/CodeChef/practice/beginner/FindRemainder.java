@@ -1,12 +1,19 @@
-package CodeForce.Template;
+/**
+ * 03/23/21 afternoon
+ * https://www.codechef.com/problems/FLOW002
+ */
+
+package CodeChef.practice.beginner;
 
 import java.util.*;
 import java.io.*;
 import static java.lang.System.out;
 
-public class N_S {
+class FindRemainder {
 
-	void solve(int n, String s) {
+	// Accepted --- 0.07sec
+	void solve(int a, int b) {
+		prni(a % b);
 	}
 
 	private void run() {
@@ -14,9 +21,9 @@ public class N_S {
 		FastScanner fs = new FastScanner();
 		int t = fs.nextInt();
 		while (t-- > 0) {
-			int n = fs.nextInt();
-			String s = fs.next();
-			solve(n, s);
+			int a = fs.nextInt();
+			int b = fs.nextInt();
+			solve(a, b);
 		}
 	}
 
@@ -36,7 +43,7 @@ public class N_S {
 	}
 
 	public static void main(String[] args) {
-		new N_S().run();
+		new FindRemainder().run();
 	}
 
 	void prni(int num) {
@@ -57,6 +64,66 @@ public class N_S {
 
 	void prc(char c) {
 		out.println(c);
+	}
+
+	void prai(int[] a) {
+		out.println(Arrays.toString(a));
+	}
+
+	void pral(long[] a) {
+		out.println(Arrays.toString(a));
+	}
+
+	void prad(double[] a) {
+		out.println(Arrays.toString(a));
+	}
+
+	void pras(String[] a) {
+		out.println(Arrays.toString(a));
+	}
+
+	void prac(char[] a) {
+		out.println(Arrays.toString(a));
+	}
+
+	void prdai(int[][] a) {
+		out.println(Arrays.deepToString(a));
+	}
+
+	void prdal(long[][] a) {
+		out.println(Arrays.deepToString(a));
+	}
+
+	void prdad(double[][] a) {
+		out.println(Arrays.deepToString(a));
+	}
+
+	void prdas(String[][] a) {
+		out.println(Arrays.deepToString(a));
+	}
+
+	void prdac(char[][] a) {
+		out.println(Arrays.deepToString(a));
+	}
+
+	void prli(List<Integer> l) {
+		out.println(l);
+	}
+
+	void prll(List<Long> l) {
+		out.println(l);
+	}
+
+	void prld(List<Double> l) {
+		out.println(l);
+	}
+
+	void prls(List<String> l) {
+		out.println(l);
+	}
+
+	void prlc(List<Character> l) {
+		out.println(l);
 	}
 
 	class FastScanner {

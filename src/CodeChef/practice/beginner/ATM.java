@@ -1,23 +1,31 @@
-package CodeForce.Template;
+/**
+ * 03/23/21 afternoon
+ * https://www.codechef.com/problems/HS08TEST
+ */
+
+package CodeChef.practice.beginner;
 
 import java.util.*;
 import java.io.*;
 import static java.lang.System.out;
 
-public class N_S {
+class ATM {
 
-	void solve(int n, String s) {
+	// Accepted --- 0.05sec
+	void solve(double x, double y) {
+		if (x % 5 != 0 || x + 0.5 > y) {
+			prnd(y);
+			return;
+		}
+		prnd(y - x - 0.5);
 	}
 
 	private void run() {
 		read_write_file(); // comment this before submission
 		FastScanner fs = new FastScanner();
-		int t = fs.nextInt();
-		while (t-- > 0) {
-			int n = fs.nextInt();
-			String s = fs.next();
-			solve(n, s);
-		}
+		double x = fs.nextDouble();
+		double y = fs.nextDouble();
+		solve(x, y);
 	}
 
 	private final String INPUT = "input.txt";
@@ -36,7 +44,7 @@ public class N_S {
 	}
 
 	public static void main(String[] args) {
-		new N_S().run();
+		new ATM().run();
 	}
 
 	void prni(int num) {
@@ -57,6 +65,66 @@ public class N_S {
 
 	void prc(char c) {
 		out.println(c);
+	}
+
+	void prai(int[] a) {
+		out.println(Arrays.toString(a));
+	}
+
+	void pral(long[] a) {
+		out.println(Arrays.toString(a));
+	}
+
+	void prad(double[] a) {
+		out.println(Arrays.toString(a));
+	}
+
+	void pras(String[] a) {
+		out.println(Arrays.toString(a));
+	}
+
+	void prac(char[] a) {
+		out.println(Arrays.toString(a));
+	}
+
+	void prdai(int[][] a) {
+		out.println(Arrays.deepToString(a));
+	}
+
+	void prdal(long[][] a) {
+		out.println(Arrays.deepToString(a));
+	}
+
+	void prdad(double[][] a) {
+		out.println(Arrays.deepToString(a));
+	}
+
+	void prdas(String[][] a) {
+		out.println(Arrays.deepToString(a));
+	}
+
+	void prdac(char[][] a) {
+		out.println(Arrays.deepToString(a));
+	}
+
+	void prli(List<Integer> l) {
+		out.println(l);
+	}
+
+	void prll(List<Long> l) {
+		out.println(l);
+	}
+
+	void prld(List<Double> l) {
+		out.println(l);
+	}
+
+	void prls(List<String> l) {
+		out.println(l);
+	}
+
+	void prlc(List<Character> l) {
+		out.println(l);
 	}
 
 	class FastScanner {

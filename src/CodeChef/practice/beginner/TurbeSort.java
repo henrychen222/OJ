@@ -1,5 +1,5 @@
 // 02/20/21 evening
-package CodeChef.practice;
+package CodeChef.practice.beginner;
 
 import java.util.*;
 import java.io.*;

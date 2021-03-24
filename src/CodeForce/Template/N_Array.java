@@ -59,66 +59,6 @@ public class N_Array {
 		out.println(c);
 	}
 
-	void prai(int[] a) {
-		out.println(Arrays.toString(a));
-	}
-
-	void pral(long[] a) {
-		out.println(Arrays.toString(a));
-	}
-
-	void prad(double[] a) {
-		out.println(Arrays.toString(a));
-	}
-
-	void pras(String[] a) {
-		out.println(Arrays.toString(a));
-	}
-
-	void prac(char[] a) {
-		out.println(Arrays.toString(a));
-	}
-
-	void prdai(int[][] a) {
-		out.println(Arrays.deepToString(a));
-	}
-
-	void prdal(long[][] a) {
-		out.println(Arrays.deepToString(a));
-	}
-
-	void prdad(double[][] a) {
-		out.println(Arrays.deepToString(a));
-	}
-
-	void prdas(String[][] a) {
-		out.println(Arrays.deepToString(a));
-	}
-
-	void prdac(char[][] a) {
-		out.println(Arrays.deepToString(a));
-	}
-
-	void prli(List<Integer> l) {
-		out.println(l);
-	}
-
-	void prll(List<Long> l) {
-		out.println(l);
-	}
-
-	void prld(List<Double> l) {
-		out.println(l);
-	}
-
-	void prls(List<String> l) {
-		out.println(l);
-	}
-
-	void prlc(List<Character> l) {
-		out.println(l);
-	}
-
 	class FastScanner {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 		StringTokenizer st = new StringTokenizer("");
@@ -146,6 +86,10 @@ public class N_Array {
 
 		long nextLong() {
 			return Long.parseLong(next());
+		}
+
+		double nextDouble() {
+			return Double.parseDouble(next());
 		}
 	}
 }
