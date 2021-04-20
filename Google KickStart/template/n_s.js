@@ -81,7 +81,8 @@ const isPalindrome = (s) => {
 ///////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////
 
-const solve = () => { };
+const solve = (n, s) => {
+};
 
 const main = () => {
     const readline = require('readline');
@@ -89,8 +90,18 @@ const main = () => {
         input: process.stdin,
         output: process.stdout
     });
+    let input = [];
     rl.on('line', (line) => {
-        console.log(solve(line));
+        input.push(line);
+    });
+    rl.on('close', () => {
+        let t = Number(input[0]);
+        let i = 1;
+        for (let cas = 1; cas <= t; cas++) {
+            let show = solve(input[i], input[i + 1]);
+            pr('Case #' + cas + ': ' + show);
+            i += 2;
+        }
     });
 };
 

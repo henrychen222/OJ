@@ -1,14 +1,23 @@
+/**
+ * 04/16/21 morning
+ * https://codeforces.com/contest/1509/problem/A
+ */
+
+
 ///////////////////////////////// pre-define /////////////////////////////////////
 const pr = console.log;
-const mi = Math.min;
-const mx = Math.max;
-const abs = Math.abs;
-const fl = Math.floor;
-const ce = Math.ceil;
-const sq = Math.sqrt;
 ///////////////////////////////////////////////////////////////////////////////////
 
-const solve = (num) => {
+// Pretests passed
+const solve = (n, a) => {
+    let odd = [];
+    let even = [];
+    for (const e of a) {
+        e & 1 ? odd.push(e) : even.push(e);
+    }
+    // pr(odd, even)
+    let res = odd.concat(even);
+    pr(res.join(" "))
 };
 
 const main = () => {
@@ -25,9 +34,8 @@ const main = () => {
         let t = input[0][0];
         let i = 1;
         while (t--) {
-            solve(input[i][0]);
-            // console.log('Case #' + cnt + ': ' + solve(input[i][0])); for kickstart
-            i++;
+            solve(input[i][0], input[i + 1]);
+            i += 2;
         }
     });
 };
