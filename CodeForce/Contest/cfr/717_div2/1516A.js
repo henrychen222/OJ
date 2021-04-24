@@ -19,8 +19,61 @@ const stin = (a) => a.sort((x, y) => x - y);
 const stde = (a) => a.sort((x, y) => y - x);
 const counter = (a_or_s) => { let map = new Map(); for (const i of a_or_s) map.set(i, map.get(i) + 1 || 1); return map; };
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+/**
+ * 04/21/20 morning
+ * https://codeforces.com/contest/1516/problem/0
+ */
+// const solve = (n, k, a) => {
+//     pr(n, k, a)
+//     let sm = sum(a);
+//     sm -= a[n - 1];
+//     pr("sum", sm, k)
+//     if (sm > k) {
+//         pr(a);
+//         // while(n)
+//     } else if (sm == k) {
+//         let res = Array(n).fill(0);
+//         res[n - 1] += k;
+//         pr(res, k);
+//     } else {
+//         let res = Array(n - 1).fill(0);
+//         // k -= sm;
+//         pr("k", k);
+//         res.push(k - sm);
+//         if (k & 1) {
+//             pr("res", res);
+//             // swap(res, n - 1, n - 2);
+//             res[n - 2]++;
+//             res[n - 1]--;
+//             pr(res);
+//         } else {
+//             pr(res);
+//         }
+//     }
+//     // while (k > 0) {
+//     //     for (let i = 0, j = n - 1; i < n; i++) {
+//     //         if (a[i] - k < 0) {
+//     //             a[i] = 0;
+//     //             k -= a[i];
+//     //             a[j] -= a[i];
+//     //         } else {
+//     //             a[i] -= k;
+//     //             a[j] -= k;
+//     //         }
+//     //     }
+//     // }
+// };
 
+// evening uwi
 const solve = (n, k, a) => {
+    let res = [...a];
+    for (let i = 0; i < n - 1; i++) {
+        let tmp = mi(a[i], k);
+        res[i] -= tmp;
+        res[n - 1] += tmp;
+        k -= tmp;
+    }
+    pr(res.join(" "));
 };
 
 const main = () => {
