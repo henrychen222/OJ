@@ -1,13 +1,80 @@
-package CodeForce.Template;
+/**
+ * 04/18/21 noon
+ * https://www.codechef.com/COOK128B/problems/OROFAND
+ */
+
+package CodeChef.contest.COOK.AprilCookOff2021_128;
 
 import java.util.*;
 import java.io.*;
 
-public class N_Array {
+class OROFAND {
 
 	static PrintWriter pw;
 
-	void solve(int n, int[] a) {
+	// Accepted --- 0.41sec  05/26/21 evening
+	// reference: https://www.codechef.com/viewsolution/45152263
+	void solve(int n, int q, long[] a, int[] x, int[] v) {
+		// trace(a);
+		int[] cnt = new int[35];
+		for (int i = 0; i < n; i++) {
+			for (int j = 0; j < 35; j++) {
+				if ((a[i] >> j & 1) == 1) {
+					// pw.println(a[i] + " " + j);
+					cnt[j]++;
+				}
+			}
+		}
+		// trace("cnt", cnt);
+		int res = 0;
+		for (int i = 0; i < 35; i++) {
+			if (cnt[i] > 0) {
+				// trace("each", cnt[i]);
+				res += 1 << i;
+				// trace("res", res);
+			}
+
+		}
+		prni(res);
+		for (int i = 0; i < q; i++) {
+			for (int j = 0; j < 35; j++) {
+				if ((1 & a[x[i]] >> j) == 1) {
+					cnt[j]--;
+				}
+			}
+			a[x[i]] = v[i];
+			for (int j = 0; j < 35; j++) {
+				if ((1 & a[x[i]] >> j) == 1) {
+					cnt[j]++;
+				}
+			}
+			res = 0;
+			for (int k = 0; k < 35; k++) {
+				if (cnt[k] > 0)
+					res += 1 << k;
+			}
+			prni(res);
+		}
+	}
+
+	// don't know
+	void solve1(int n, int q, int[] a, int[] x, int[] v) {
+		pw.println(1 & 2 & 3);
+		pw.println(n + " " + q);
+		pw.println("a" + " " + Arrays.toString(a));
+//		pw.println(Arrays.toString(x));
+//		pw.println(Arrays.toString(v));
+		int[] pre = new int[n + 1];
+		for (int i = 0; i < n; i++) {
+			pre[i + 1] = pre[i] & a[i];
+		}
+		pw.println("pre" + " " + Arrays.toString(pre));
+		for (int i = 0; i < n; i++) {
+			for (int j = i; j < n; j++) {
+				int[] sub = Arrays.copyOfRange(a, i, j + 1);
+				pw.println(Arrays.toString(sub));
+			}
+		}
 	}
 
 	private void run() {
@@ -16,8 +83,15 @@ public class N_Array {
 		int t = fs.nextInt();
 		while (t-- > 0) {
 			int n = fs.nextInt();
-			int[] a = fs.readArray(n);
-			solve(n, a);
+			int q = fs.nextInt();
+			long[] a = fs.readlongArray(n);
+			int[] x = new int[q];
+			int[] v = new int[q];
+			for (int i = 0; i < q; i++) {
+				x[i] = fs.nextInt() - 1;
+				v[i] = fs.nextInt();
+			}
+			solve(n, q, a, x, v);
 		}
 	}
 
@@ -38,7 +112,7 @@ public class N_Array {
 
 	public static void main(String[] args) {
 		pw = new PrintWriter(System.out);
-		new N_Array().run();
+		new OROFAND().run();
 		pw.close();
 	}
 
@@ -84,6 +158,13 @@ public class N_Array {
 			int[] a = new int[n];
 			for (int i = 0; i < n; i++)
 				a[i] = nextInt();
+			return a;
+		}
+
+		long[] readlongArray(int n) {
+			long[] a = new long[n];
+			for (int i = 0; i < n; i++)
+				a[i] = nextLong();
 			return a;
 		}
 
@@ -135,7 +216,7 @@ public class N_Array {
 		pw.println(Arrays.deepToString(a));
 	}
 
-	////////////////////////////////////////////
+	//////////////////////////////////////
 	void trace(String hint, int x) {
 		pw.println(hint + " " + x);
 	}
@@ -167,4 +248,5 @@ public class N_Array {
 	void trace(String hint, long[][] a) {
 		pw.println(hint + " " + Arrays.deepToString(a));
 	}
+
 }

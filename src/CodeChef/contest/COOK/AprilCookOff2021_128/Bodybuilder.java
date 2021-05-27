@@ -1,13 +1,64 @@
-package CodeForce.Template;
+/**
+ * 04/18/21 noon
+ * https://www.codechef.com/COOK128B/problems/BUILDB
+ */
+
+package CodeChef.contest.COOK.AprilCookOff2021_128;
 
 import java.util.*;
 import java.io.*;
 
-public class N_Array {
+class Bodybuilder {
 
 	static PrintWriter pw;
 
-	void solve(int n, int[] a) {
+	// Accepted --- 0.31sec  05/26/21 evening
+	// reference: https://www.codechef.com/viewsolution/45144135
+	void solve(int n, int r, int[] a, int[] b) {
+		int preT = a[0];
+		long tension = 0;
+		long res = 0;
+		for (int i = 0; i < n; i++) {
+			tension = Math.max(0, tension - (a[i] - preT) * r);
+			tension += b[i];
+			res = Math.max(res, tension);
+			preT = a[i];
+		}
+		prnl(res);
+	}
+
+	// WA
+	void solve2(int n, int r, int[] a, int[] b) {
+		int preT = a[0];
+		long tension = b[0];
+		long res = b[0];
+		for (int i = 1; i < n; i++) {
+			tension -= r * (a[i] - preT); // issue
+			tension += b[i];
+			res = Math.max(res, tension);
+			preT = a[i];
+		}
+		prnl(res);
+	}
+
+	void solve1(int n, int r, int[] a, int[] b) {
+		TreeMap<Integer, Integer> tm = new TreeMap<>();
+		for (int i = 0; i < n; i++) {
+			tm.put(a[i], b[i]);
+		}
+		int preT = tm.firstKey();
+		int sten = tm.get(preT);
+		long tension = sten;
+		long res = sten;
+		tm.remove(preT);
+		for (int k : tm.keySet()) {
+			int v = tm.get(k);
+			tension -= r * (k - preT);
+			tension += v;
+			res = Math.max(res, tension);
+			preT = k;
+		}
+		prnl(res);
 	}
 
 	private void run() {
@@ -16,8 +67,10 @@ public class N_Array {
 		int t = fs.nextInt();
 		while (t-- > 0) {
 			int n = fs.nextInt();
+			int r = fs.nextInt();
 			int[] a = fs.readArray(n);
-			solve(n, a);
+			int[] b = fs.readArray(n);
+			solve(n, r, a, b);
 		}
 	}
 
@@ -38,7 +91,7 @@ public class N_Array {
 
 	public static void main(String[] args) {
 		pw = new PrintWriter(System.out);
-		new N_Array().run();
+		new Bodybuilder().run();
 		pw.close();
 	}
 
@@ -101,70 +154,5 @@ public class N_Array {
 		double nextDouble() {
 			return Double.parseDouble(next());
 		}
-	}
-
-	void trace(int x) {
-		pw.println(x);
-	}
-
-	void trace(long x) {
-		pw.println(x);
-	}
-
-	void trace(char c) {
-		pw.println(c);
-	}
-
-	void trace(String s) {
-		pw.println(s);
-	}
-
-	void trace(int[] a) {
-		pw.println(Arrays.toString(a));
-	}
-
-	void trace(long[] a) {
-		pw.println(Arrays.toString(a));
-	}
-
-	void trace(int[][] a) {
-		pw.println(Arrays.deepToString(a));
-	}
-
-	void trace(long[][] a) {
-		pw.println(Arrays.deepToString(a));
-	}
-
-	////////////////////////////////////////////
-	void trace(String hint, int x) {
-		pw.println(hint + " " + x);
-	}
-
-	void trace(String hint, long x) {
-		pw.println(hint + " " + x);
-	}
-
-	void trace(String hint, char c) {
-		pw.println(hint + " " + c);
-	}
-
-	void trace(String hint, String s) {
-		pw.println(hint + " " + s);
-	}
-
-	void trace(String hint, int[] a) {
-		pw.println(hint + " " + Arrays.toString(a));
-	}
-
-	void trace(String hint, long[] a) {
-		pw.println(hint + " " + Arrays.toString(a));
-	}
-
-	void trace(String hint, int[][] a) {
-		pw.println(hint + " " + Arrays.deepToString(a));
-	}
-
-	void trace(String hint, long[][] a) {
-		pw.println(hint + " " + Arrays.deepToString(a));
 	}
 }

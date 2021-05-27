@@ -1,13 +1,29 @@
-package CodeForce.Template;
+/**
+ * 05/23/21 noon
+ * https://www.codechef.com/COOK129C/problems/MARARUN
+ */
+
+package CodeChef.contest.COOK.MayCookOff2021_129;
 
 import java.util.*;
 import java.io.*;
 
-public class N_Array {
+class Marathon {
 
 	static PrintWriter pw;
 
-	void solve(int n, int[] a) {
+	// Accepted --- 0.05sec
+	void solve(int D, int d, int A, int B, int C) {
+		int m = D * d;
+		if (m >= 42) {
+			prni(C);
+		} else if (m >= 21) {
+			prni(B);
+		} else if (m >= 10) {
+			prni(A);
+		} else {
+			prni(0);
+		}
 	}
 
 	private void run() {
@@ -15,9 +31,12 @@ public class N_Array {
 		FastScanner fs = new FastScanner();
 		int t = fs.nextInt();
 		while (t-- > 0) {
-			int n = fs.nextInt();
-			int[] a = fs.readArray(n);
-			solve(n, a);
+			int D = fs.nextInt();
+			int d = fs.nextInt();
+			int A = fs.nextInt();
+			int B = fs.nextInt();
+			int C = fs.nextInt();
+			solve(D, d, A, B, C);
 		}
 	}
 
@@ -38,7 +57,7 @@ public class N_Array {
 
 	public static void main(String[] args) {
 		pw = new PrintWriter(System.out);
-		new N_Array().run();
+		new Marathon().run();
 		pw.close();
 	}
 
@@ -101,70 +120,5 @@ public class N_Array {
 		double nextDouble() {
 			return Double.parseDouble(next());
 		}
-	}
-
-	void trace(int x) {
-		pw.println(x);
-	}
-
-	void trace(long x) {
-		pw.println(x);
-	}
-
-	void trace(char c) {
-		pw.println(c);
-	}
-
-	void trace(String s) {
-		pw.println(s);
-	}
-
-	void trace(int[] a) {
-		pw.println(Arrays.toString(a));
-	}
-
-	void trace(long[] a) {
-		pw.println(Arrays.toString(a));
-	}
-
-	void trace(int[][] a) {
-		pw.println(Arrays.deepToString(a));
-	}
-
-	void trace(long[][] a) {
-		pw.println(Arrays.deepToString(a));
-	}
-
-	////////////////////////////////////////////
-	void trace(String hint, int x) {
-		pw.println(hint + " " + x);
-	}
-
-	void trace(String hint, long x) {
-		pw.println(hint + " " + x);
-	}
-
-	void trace(String hint, char c) {
-		pw.println(hint + " " + c);
-	}
-
-	void trace(String hint, String s) {
-		pw.println(hint + " " + s);
-	}
-
-	void trace(String hint, int[] a) {
-		pw.println(hint + " " + Arrays.toString(a));
-	}
-
-	void trace(String hint, long[] a) {
-		pw.println(hint + " " + Arrays.toString(a));
-	}
-
-	void trace(String hint, int[][] a) {
-		pw.println(hint + " " + Arrays.deepToString(a));
-	}
-
-	void trace(String hint, long[][] a) {
-		pw.println(hint + " " + Arrays.deepToString(a));
 	}
 }

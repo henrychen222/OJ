@@ -1,14 +1,61 @@
-package CodeForce.Template;
+/**
+ * 04/18/21 noon
+ * https://www.codechef.com/COOK128B/problems/CM164364
+ */
+
+package CodeChef.contest.COOK.AprilCookOff2021_128;
 
 import java.util.*;
+import java.util.Map.Entry;
 import java.io.*;
 
-public class N_Array {
-
+class ChocolateMonger {
+    
 	static PrintWriter pw;
-
-	void solve(int n, int[] a) {
+	
+	public static Map<Integer, Integer> sortMapByValues(Map<Integer, Integer> map) {
+		List<Entry<Integer, Integer>> data = new ArrayList<>(map.entrySet());
+		Collections.sort(data, new Comparator<Entry<Integer, Integer>>() {
+			public int compare(Entry<Integer, Integer> o1, Entry<Integer, Integer> o2) {
+				return o2.getValue().compareTo(o1.getValue());
+			}
+		});
+		Map<Integer, Integer> sortedHashMap = new LinkedHashMap<>();
+		for (Iterator<Entry<Integer, Integer>> it = data.iterator(); it.hasNext();) {
+			Map.Entry<Integer, Integer> entry = it.next();
+			sortedHashMap.put(entry.getKey(), entry.getValue());
+		}
+		return sortedHashMap;
 	}
+	
+	// Accepted --- 0.49sec
+	void solve(int n, int x, int[] a) {
+		Map<Integer, Integer> m = new HashMap<>();
+		for (int e : a) {
+			m.put(e, m.getOrDefault(e, 0) + 1);
+		}
+		m = sortMapByValues(m);
+		// pw.println(m);
+		int remove = 0;
+		for (int k: m.keySet()) {
+			int v = m.get(k);
+			if (x > 0) {
+				x -= v - 1;
+				remove += v - 1;
+				m.put(k, 1);
+			} else {
+				break;
+			}
+		}
+//		pw.println(m);
+//		pw.println(x + " " + remove);
+		if (x <= 0) {
+			pw.println(m.size());
+			return;
+		}
+		pw.println(m.size() - x);
+	}
+	
 
 	private void run() {
 		read_write_file(); // comment this before submission
@@ -16,8 +63,9 @@ public class N_Array {
 		int t = fs.nextInt();
 		while (t-- > 0) {
 			int n = fs.nextInt();
+			int x = fs.nextInt();
 			int[] a = fs.readArray(n);
-			solve(n, a);
+			solve(n, x, a);
 		}
 	}
 
@@ -38,7 +86,7 @@ public class N_Array {
 
 	public static void main(String[] args) {
 		pw = new PrintWriter(System.out);
-		new N_Array().run();
+		new ChocolateMonger().run();
 		pw.close();
 	}
 
@@ -86,7 +134,7 @@ public class N_Array {
 				a[i] = nextInt();
 			return a;
 		}
-
+		
 		Integer[] readIntegerArray(int n) {
 			Integer[] a = new Integer[n];
 			for (int i = 0; i < n; i++)
@@ -101,70 +149,5 @@ public class N_Array {
 		double nextDouble() {
 			return Double.parseDouble(next());
 		}
-	}
-
-	void trace(int x) {
-		pw.println(x);
-	}
-
-	void trace(long x) {
-		pw.println(x);
-	}
-
-	void trace(char c) {
-		pw.println(c);
-	}
-
-	void trace(String s) {
-		pw.println(s);
-	}
-
-	void trace(int[] a) {
-		pw.println(Arrays.toString(a));
-	}
-
-	void trace(long[] a) {
-		pw.println(Arrays.toString(a));
-	}
-
-	void trace(int[][] a) {
-		pw.println(Arrays.deepToString(a));
-	}
-
-	void trace(long[][] a) {
-		pw.println(Arrays.deepToString(a));
-	}
-
-	////////////////////////////////////////////
-	void trace(String hint, int x) {
-		pw.println(hint + " " + x);
-	}
-
-	void trace(String hint, long x) {
-		pw.println(hint + " " + x);
-	}
-
-	void trace(String hint, char c) {
-		pw.println(hint + " " + c);
-	}
-
-	void trace(String hint, String s) {
-		pw.println(hint + " " + s);
-	}
-
-	void trace(String hint, int[] a) {
-		pw.println(hint + " " + Arrays.toString(a));
-	}
-
-	void trace(String hint, long[] a) {
-		pw.println(hint + " " + Arrays.toString(a));
-	}
-
-	void trace(String hint, int[][] a) {
-		pw.println(hint + " " + Arrays.deepToString(a));
-	}
-
-	void trace(String hint, long[][] a) {
-		pw.println(hint + " " + Arrays.deepToString(a));
 	}
 }

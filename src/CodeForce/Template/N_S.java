@@ -2,9 +2,10 @@ package CodeForce.Template;
 
 import java.util.*;
 import java.io.*;
-import static java.lang.System.out;
 
 public class N_S {
+
+	static PrintWriter pw;
 
 	void solve(int n, String s) {
 	}
@@ -36,27 +37,29 @@ public class N_S {
 	}
 
 	public static void main(String[] args) {
+		pw = new PrintWriter(System.out);
 		new N_S().run();
+		pw.close();
 	}
 
 	void prni(int num) {
-		out.println(num);
+		pw.println(num);
 	}
 
 	void prnl(long num) {
-		out.println(num);
+		pw.println(num);
 	}
 
 	void prnd(double num) {
-		out.println(num);
+		pw.println(num);
 	}
 
 	void prs(String s) {
-		out.println(s);
+		pw.println(s);
 	}
 
 	void prc(char c) {
-		out.println(c);
+		pw.println(c);
 	}
 
 	class FastScanner {
@@ -84,6 +87,13 @@ public class N_S {
 			return a;
 		}
 
+		Integer[] readIntegerArray(int n) {
+			Integer[] a = new Integer[n];
+			for (int i = 0; i < n; i++)
+				a[i] = nextInt();
+			return a;
+		}
+
 		long nextLong() {
 			return Long.parseLong(next());
 		}
@@ -91,5 +101,70 @@ public class N_S {
 		double nextDouble() {
 			return Double.parseDouble(next());
 		}
+	}
+
+	void trace(int x) {
+		pw.println(x);
+	}
+
+	void trace(long x) {
+		pw.println(x);
+	}
+
+	void trace(char c) {
+		pw.println(c);
+	}
+
+	void trace(String s) {
+		pw.println(s);
+	}
+
+	void trace(int[] a) {
+		pw.println(Arrays.toString(a));
+	}
+
+	void trace(long[] a) {
+		pw.println(Arrays.toString(a));
+	}
+
+	void trace(int[][] a) {
+		pw.println(Arrays.deepToString(a));
+	}
+
+	void trace(long[][] a) {
+		pw.println(Arrays.deepToString(a));
+	}
+
+	////////////////////////////////////////////
+	void trace(String hint, int x) {
+		pw.println(hint + " " + x);
+	}
+
+	void trace(String hint, long x) {
+		pw.println(hint + " " + x);
+	}
+
+	void trace(String hint, char c) {
+		pw.println(hint + " " + c);
+	}
+
+	void trace(String hint, String s) {
+		pw.println(hint + " " + s);
+	}
+
+	void trace(String hint, int[] a) {
+		pw.println(hint + " " + Arrays.toString(a));
+	}
+
+	void trace(String hint, long[] a) {
+		pw.println(hint + " " + Arrays.toString(a));
+	}
+
+	void trace(String hint, int[][] a) {
+		pw.println(hint + " " + Arrays.deepToString(a));
+	}
+
+	void trace(String hint, long[][] a) {
+		pw.println(hint + " " + Arrays.deepToString(a));
 	}
 }
