@@ -1,13 +1,24 @@
-package CodeForce.Template;
+/**
+ * 06/20/21 noon
+ * https://www.codechef.com/COOK130C/problems/VISA
+ */
+
+package CodeChef.contest.COOK.JuneCookOff2021_130;
 
 import java.util.*;
 import java.io.*;
 
-public class N_Array {
+class CheflandVisa {
 
 	static PrintWriter pw;
 
-	void solve(int n, int[] a) {
+	// Accepted --- 0.12sec
+	void solve(int x1, int x2, int y1, int y2, int z1, int z2) {
+		if (x2 >= x1 && y2 >= y1 && z2 <= z1) {
+			pr("YES");
+			return;
+		}
+		pr("NO");
 	}
 
 	private void run() {
@@ -15,9 +26,13 @@ public class N_Array {
 		FastScanner fs = new FastScanner();
 		int t = fs.nextInt();
 		while (t-- > 0) {
-			int n = fs.nextInt();
-			int[] a = fs.readArray(n);
-			solve(n, a);
+			int x1 = fs.nextInt();
+			int x2 = fs.nextInt();
+			int y1 = fs.nextInt();
+			int y2 = fs.nextInt();
+			int z1 = fs.nextInt();
+			int z2 = fs.nextInt();
+			solve(x1, x2, y1, y2, z1, z2);
 		}
 	}
 
@@ -38,7 +53,7 @@ public class N_Array {
 
 	public static void main(String[] args) {
 		pw = new PrintWriter(System.out);
-		new N_Array().run();
+		new CheflandVisa().run();
 		pw.close();
 	}
 

@@ -1,6 +1,6 @@
 /**
  * 02/25/21 morning
- * https://www.codechef.com/LTC22021/problems/LTC06
+ * https://www.codechef.com/LTC22021/problems/LTC07
  */
 
 package CodeChef.contest.LearnToCode_2;
@@ -11,7 +11,7 @@ import static java.lang.System.out;
 
 class C {
 
-	// Accepted 0.06sec
+	// Accepted --- 0.06sec https://www.codechef.com/viewsolution/43055271
 	void solve(String s) {
 		Map<Character, Integer> m = new HashMap<>();
 		for (int i = 0; i <= 9; i++) {

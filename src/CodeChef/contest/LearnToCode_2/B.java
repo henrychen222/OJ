@@ -10,9 +10,23 @@ import java.io.*;
 import static java.lang.System.out;
 
 class B {
-    
-	// WA
+
+	// 06/26/21 evening
+	// reference: https://www.codechef.com/viewsolution/43056147
+	// Accepted --- 0.05sec https://www.codechef.com/viewsolution/48234209
 	void solve(int n) {
+		long[] dp = new long[n];
+		dp[0] = 1;
+		dp[1] = 2;
+		dp[2] = 3;
+		for (int i = 3; i < n; i++) {
+			dp[i] = dp[i - 3] + dp[i - 1];
+		}
+		prnl(dp[n - 1]);
+	}
+
+	// WA
+	void solve1(int n) {
 		long[] dp = new long[n];
 		dp[0] = 1L;
 		dp[1] = 2L;

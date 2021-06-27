@@ -1,13 +1,65 @@
-package CodeForce.Template;
+/**
+ * 05/31/21 morning
+ * https://www.codechef.com/LTIME96C/problems/CHESUB
+ */
+
+package CodeChef.contest.LTIME.MayLunchtime2021_96;
 
 import java.util.*;
 import java.io.*;
 
-public class N_Array {
+class KSubarrays {
 
 	static PrintWriter pw;
 
-	void solve(int n, int[] a) {
+	// 06/26/21 evening
+	// Accepted --- 0.38sec  https://www.codechef.com/viewsolution/48234148
+	/**
+	 * reference:
+	 * https://www.codechef.com/viewsolution/47140992
+	 */
+	private final long inf = (long) 1e18;
+	void solve(int n, int k, int[] a) {
+		// tr(n, k, a);
+		long[] dp = new long[2 * k + 1];
+		Arrays.fill(dp, -inf);
+		dp[0] = 0;
+		for (int x : a) {
+			long[] ndp = new long[2 * k + 1];
+			Arrays.fill(ndp, -inf);
+			for (int i = 0; i <= 2 * k; i++) {
+				if (i % 2 == 0) {
+					ndp[i] = Math.max(ndp[i], dp[i]);
+					if (i + 1 <= 2 * k) {
+						ndp[i + 1] = Math.max(ndp[i + 1], dp[i] + (i + 2) / 2 * x);
+					}
+				} else {
+					ndp[i] = Math.max(ndp[i], dp[i] + (i + 1) / 2 * x);
+					ndp[i + 1] = Math.max(ndp[i + 1], dp[i]);
+					if (i + 2 <= 2 * k) {
+						ndp[i + 2] = Math.max(ndp[i + 2], dp[i] + (i + 3) / 2 * x);
+					}
+				}
+			}
+			long[] tmp = ndp;
+			ndp = dp;
+			dp = tmp;
+		}
+		pr(Math.max(dp[2 * k - 1], dp[2 * k]));
+	}
+
+	// don't know
+	long cal(char[] a) {
+		int n = a.length;
+		long sum = 0;
+		for (int i = 0; i + 1 < n; i++) {
+			if (a[i] == a[i + 1]) {
+				sum += 2;
+			} else {
+				sum++;
+			}
+		}
+		return sum;
 	}
 
 	private void run() {
@@ -16,8 +68,9 @@ public class N_Array {
 		int t = fs.nextInt();
 		while (t-- > 0) {
 			int n = fs.nextInt();
+			int k = fs.nextInt();
 			int[] a = fs.readArray(n);
-			solve(n, a);
+			solve(n, k, a);
 		}
 	}
 
@@ -38,7 +91,7 @@ public class N_Array {
 
 	public static void main(String[] args) {
 		pw = new PrintWriter(System.out);
-		new N_Array().run();
+		new KSubarrays().run();
 		pw.close();
 	}
 

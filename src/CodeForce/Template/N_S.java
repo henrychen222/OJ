@@ -42,23 +42,23 @@ public class N_S {
 		pw.close();
 	}
 
-	void prni(int num) {
+	void pr(int num) {
 		pw.println(num);
 	}
 
-	void prnl(long num) {
+	void pr(long num) {
 		pw.println(num);
 	}
 
-	void prnd(double num) {
+	void pr(double num) {
 		pw.println(num);
 	}
 
-	void prs(String s) {
+	void pr(String s) {
 		pw.println(s);
 	}
 
-	void prc(char c) {
+	void pr(char c) {
 		pw.println(c);
 	}
 
@@ -103,68 +103,7 @@ public class N_S {
 		}
 	}
 
-	void trace(int x) {
-		pw.println(x);
-	}
-
-	void trace(long x) {
-		pw.println(x);
-	}
-
-	void trace(char c) {
-		pw.println(c);
-	}
-
-	void trace(String s) {
-		pw.println(s);
-	}
-
-	void trace(int[] a) {
-		pw.println(Arrays.toString(a));
-	}
-
-	void trace(long[] a) {
-		pw.println(Arrays.toString(a));
-	}
-
-	void trace(int[][] a) {
-		pw.println(Arrays.deepToString(a));
-	}
-
-	void trace(long[][] a) {
-		pw.println(Arrays.deepToString(a));
-	}
-
-	////////////////////////////////////////////
-	void trace(String hint, int x) {
-		pw.println(hint + " " + x);
-	}
-
-	void trace(String hint, long x) {
-		pw.println(hint + " " + x);
-	}
-
-	void trace(String hint, char c) {
-		pw.println(hint + " " + c);
-	}
-
-	void trace(String hint, String s) {
-		pw.println(hint + " " + s);
-	}
-
-	void trace(String hint, int[] a) {
-		pw.println(hint + " " + Arrays.toString(a));
-	}
-
-	void trace(String hint, long[] a) {
-		pw.println(hint + " " + Arrays.toString(a));
-	}
-
-	void trace(String hint, int[][] a) {
-		pw.println(hint + " " + Arrays.deepToString(a));
-	}
-
-	void trace(String hint, long[][] a) {
-		pw.println(hint + " " + Arrays.deepToString(a));
+	void tr(Object... o) {
+		pw.println(Arrays.deepToString(o));
 	}
 }

@@ -1,13 +1,20 @@
-package CodeForce.Template;
+/**
+ * 06/26/21 noon
+ * https://www.codechef.com/LTIME97C/problems/CHFRICH
+ * start at 12:17PM only 1 hour left
+ */
+package CodeChef.contest.LTIME.JuneLunchtime2021_97;
 
 import java.util.*;
 import java.io.*;
 
-public class N_Array {
+class RichieRich {
 
 	static PrintWriter pw;
 
-	void solve(int n, int[] a) {
+	// Accepted --- 0.19sec
+	void solve(int a, int b, int x) {
+		pr((b - a) / x);
 	}
 
 	private void run() {
@@ -15,9 +22,10 @@ public class N_Array {
 		FastScanner fs = new FastScanner();
 		int t = fs.nextInt();
 		while (t-- > 0) {
-			int n = fs.nextInt();
-			int[] a = fs.readArray(n);
-			solve(n, a);
+			int a = fs.nextInt();
+			int b = fs.nextInt();
+			int x = fs.nextInt();
+			solve(a, b, x);
 		}
 	}
 
@@ -38,7 +46,7 @@ public class N_Array {
 
 	public static void main(String[] args) {
 		pw = new PrintWriter(System.out);
-		new N_Array().run();
+		new RichieRich().run();
 		pw.close();
 	}
 

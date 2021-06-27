@@ -1,13 +1,23 @@
-package CodeForce.Template;
+/**
+ * 06/26/21 noon
+ * https://www.codechef.com/LTIME97C/problems/FALSNUM
+ */
+package CodeChef.contest.LTIME.JuneLunchtime2021_97;
 
 import java.util.*;
 import java.io.*;
 
-public class N_Array {
+class FalseNumber {
 
 	static PrintWriter pw;
-
-	void solve(int n, int[] a) {
+	
+	// Accepted --- 0.14sec
+	void solve(String s) {
+		 if (s.charAt(0) == '1') {
+			 pr("10" + s.substring(1));
+		 } else {
+			 pr("1" + s);
+		 }
 	}
 
 	private void run() {
@@ -15,9 +25,8 @@ public class N_Array {
 		FastScanner fs = new FastScanner();
 		int t = fs.nextInt();
 		while (t-- > 0) {
-			int n = fs.nextInt();
-			int[] a = fs.readArray(n);
-			solve(n, a);
+			String s = fs.next();
+	        solve(s);
 		}
 	}
 
@@ -38,7 +47,7 @@ public class N_Array {
 
 	public static void main(String[] args) {
 		pw = new PrintWriter(System.out);
-		new N_Array().run();
+		new FalseNumber().run();
 		pw.close();
 	}
 

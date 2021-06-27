@@ -1,13 +1,22 @@
-package CodeForce.Template;
+/**
+ * 05/26/21 night
+ * https://www.codechef.com/problems/FLOW004
+ */
+
+package CodeChef.practice.beginner;
 
 import java.util.*;
 import java.io.*;
 
-public class N_Array {
+class FirstLastDigit {
 
 	static PrintWriter pw;
 
-	void solve(int n, int[] a) {
+	// Accepted --- 0.06sec
+	void solve(int x) {
+		String s = x + "";
+		int n = s.length();
+		prni(s.charAt(0) - '0' + s.charAt(n - 1) - '0');
 	}
 
 	private void run() {
@@ -15,9 +24,8 @@ public class N_Array {
 		FastScanner fs = new FastScanner();
 		int t = fs.nextInt();
 		while (t-- > 0) {
-			int n = fs.nextInt();
-			int[] a = fs.readArray(n);
-			solve(n, a);
+			int x = fs.nextInt();
+			solve(x);
 		}
 	}
 
@@ -38,27 +46,27 @@ public class N_Array {
 
 	public static void main(String[] args) {
 		pw = new PrintWriter(System.out);
-		new N_Array().run();
+		new FirstLastDigit().run();
 		pw.close();
 	}
 
-	void pr(int num) {
+	void prni(int num) {
 		pw.println(num);
 	}
 
-	void pr(long num) {
+	void prnl(long num) {
 		pw.println(num);
 	}
 
-	void pr(double num) {
+	void prnd(double num) {
 		pw.println(num);
 	}
 
-	void pr(String s) {
+	void prs(String s) {
 		pw.println(s);
 	}
 
-	void pr(char c) {
+	void prc(char c) {
 		pw.println(c);
 	}
 

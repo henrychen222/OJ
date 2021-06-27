@@ -1,13 +1,60 @@
-package CodeForce.Template;
+/**
+ * 05/31/21 morning
+ * https://www.codechef.com/LTIME96C/problems/CHARGES
+ */
+
+package CodeChef.contest.LTIME.MayLunchtime2021_96;
 
 import java.util.*;
 import java.io.*;
 
-public class N_Array {
+class Charges {
 
 	static PrintWriter pw;
 
-	void solve(int n, int[] a) {
+	// Accepted
+	void solve(int n, int k, String s, int[] Q) {
+		// tr(n, k, s, q);
+		char[] a = s.toCharArray();
+		if (n == 1) {
+			// prni(2);
+			prni(0); // fuck here
+			return;
+		}
+		long sum = cal(a);
+		for (int q : Q) {
+			int i = q - 1;
+			if (i == 0) {
+				char[] pre = { a[i], a[i + 1] };
+				a[i] ^= 1;
+				char[] cur = { a[i], a[i + 1] };
+				sum = sum - cal(pre) + cal(cur);
+			} else if (i == n - 1) {
+				char[] pre = { a[i - 1], a[i] };
+				a[i] ^= 1;
+				char[] cur = { a[i - 1], a[i] };
+				sum = sum - cal(pre) + cal(cur);
+			} else {
+				char[] pre = { a[i - 1], a[i], a[i + 1] };
+				a[i] ^= 1;
+				char[] cur = { a[i - 1], a[i], a[i + 1] };
+				sum = sum - cal(pre) + cal(cur);
+			}
+			prnl(sum);
+		}
+	}
+
+	long cal(char[] a) {
+		int n = a.length;
+		long sum = 0;
+		for (int i = 0; i + 1 < n; i++) {
+			if (a[i] == a[i + 1]) {
+				sum += 2;
+			} else {
+				sum++;
+			}
+		}
+		return sum;
 	}
 
 	private void run() {
@@ -16,8 +63,10 @@ public class N_Array {
 		int t = fs.nextInt();
 		while (t-- > 0) {
 			int n = fs.nextInt();
-			int[] a = fs.readArray(n);
-			solve(n, a);
+			int k = fs.nextInt();
+			String s = fs.next();
+			int[] q = fs.readArray(k);
+			solve(n, k, s, q);
 		}
 	}
 
@@ -38,27 +87,27 @@ public class N_Array {
 
 	public static void main(String[] args) {
 		pw = new PrintWriter(System.out);
-		new N_Array().run();
+		new Charges().run();
 		pw.close();
 	}
 
-	void pr(int num) {
+	void prni(int num) {
 		pw.println(num);
 	}
 
-	void pr(long num) {
+	void prnl(long num) {
 		pw.println(num);
 	}
 
-	void pr(double num) {
+	void prnd(double num) {
 		pw.println(num);
 	}
 
-	void pr(String s) {
+	void prs(String s) {
 		pw.println(s);
 	}
 
-	void pr(char c) {
+	void prc(char c) {
 		pw.println(c);
 	}
 

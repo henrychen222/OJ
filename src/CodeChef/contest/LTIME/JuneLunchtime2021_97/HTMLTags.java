@@ -1,13 +1,48 @@
-package CodeForce.Template;
+/**
+ * 06/26/21 noon
+ * https://www.codechef.com/LTIME97C/problems/HTMLTAGS
+ */
+package CodeChef.contest.LTIME.JuneLunchtime2021_97;
 
 import java.util.*;
 import java.io.*;
 
-public class N_Array {
+class HTMLTags {
 
 	static PrintWriter pw;
 
-	void solve(int n, int[] a) {
+	// Accepted 0.13sec
+	void solve(String s) {
+		int n = s.length();
+		if (n <= 3) { // bug: case like < </>
+			pr("Error");
+			return;
+		}
+		for (int i = 0; i < n; i++) {
+			char c = s.charAt(i);
+			if (i == 0) {
+				if (c != '<') {
+					pr("Error");
+					return;
+				}
+			} else if (i == 1) {
+				if (c != '/') {
+					pr("Error");
+					return;
+				}
+			} else if (i == n - 1) {
+				if (c != '>') {
+					pr("Error");
+					return;
+				}
+			} else {
+				if (!Character.isDigit(c) && !Character.isLowerCase(c)) {
+					pr("Error");
+					return;
+				}
+			}
+		}
+		pr("Success");
 	}
 
 	private void run() {
@@ -15,9 +50,8 @@ public class N_Array {
 		FastScanner fs = new FastScanner();
 		int t = fs.nextInt();
 		while (t-- > 0) {
-			int n = fs.nextInt();
-			int[] a = fs.readArray(n);
-			solve(n, a);
+			String s = fs.next();
+			solve(s);
 		}
 	}
 
@@ -38,7 +72,7 @@ public class N_Array {
 
 	public static void main(String[] args) {
 		pw = new PrintWriter(System.out);
-		new N_Array().run();
+		new HTMLTags().run();
 		pw.close();
 	}
 

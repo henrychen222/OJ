@@ -1,13 +1,32 @@
-package CodeForce.Template;
+/**
+ * 05/31/21 morning
+ * https://www.codechef.com/LTIME96C/problems/TANDJ1
+ */
+
+package CodeChef.contest.LTIME.MayLunchtime2021_96;
 
 import java.util.*;
 import java.io.*;
 
-public class N_Array {
+class TomJerry {
 
 	static PrintWriter pw;
 
-	void solve(int n, int[] a) {
+	// Accepted
+	void solve(int x1, int y1, int x2, int y2, int k) {
+		int dis = Math.abs(x1 - x2) + Math.abs(y1 - y2);
+		if (k < dis) {
+			prs("NO");
+		} else if (k == dis) {
+			prs("YES");
+		} else {
+			int rest = k - dis;
+			if (rest % 2 == 0) {
+				prs("YES");
+			} else {
+				prs("NO");
+			}
+		}
 	}
 
 	private void run() {
@@ -15,9 +34,12 @@ public class N_Array {
 		FastScanner fs = new FastScanner();
 		int t = fs.nextInt();
 		while (t-- > 0) {
-			int n = fs.nextInt();
-			int[] a = fs.readArray(n);
-			solve(n, a);
+			int x1 = fs.nextInt();
+			int y1 = fs.nextInt();
+			int x2 = fs.nextInt();
+			int y2 = fs.nextInt();
+			int k = fs.nextInt();
+			solve(x1, y1, x2, y2, k);
 		}
 	}
 
@@ -38,27 +60,27 @@ public class N_Array {
 
 	public static void main(String[] args) {
 		pw = new PrintWriter(System.out);
-		new N_Array().run();
+		new TomJerry().run();
 		pw.close();
 	}
 
-	void pr(int num) {
+	void prni(int num) {
 		pw.println(num);
 	}
 
-	void pr(long num) {
+	void prnl(long num) {
 		pw.println(num);
 	}
 
-	void pr(double num) {
+	void prnd(double num) {
 		pw.println(num);
 	}
 
-	void pr(String s) {
+	void prs(String s) {
 		pw.println(s);
 	}
 
-	void pr(char c) {
+	void prc(char c) {
 		pw.println(c);
 	}
 

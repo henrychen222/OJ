@@ -1,13 +1,25 @@
-package CodeForce.Template;
+/**
+ * 06/20/21 noon
+ * https://www.codechef.com/COOK130C/problems/BALLOON
+ */
+
+package CodeChef.contest.COOK.JuneCookOff2021_130;
 
 import java.util.*;
 import java.io.*;
 
-public class N_Array {
+class ICPCBalloons {
 
 	static PrintWriter pw;
 
+	// Accepted --- 0.18sec
 	void solve(int n, int[] a) {
+       for (int i = n - 1; i >= 0; i--) {
+    	   if (a[i] >= 1 && a[i] <= 7) {
+    		   pr(i + 1);
+    		   return;
+    	   }
+       }
 	}
 
 	private void run() {
@@ -38,7 +50,7 @@ public class N_Array {
 
 	public static void main(String[] args) {
 		pw = new PrintWriter(System.out);
-		new N_Array().run();
+		new ICPCBalloons().run();
 		pw.close();
 	}
 

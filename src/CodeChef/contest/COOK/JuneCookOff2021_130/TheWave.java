@@ -1,23 +1,50 @@
-package CodeForce.Template;
+/**
+ * 06/20/21 noon
+ * https://www.codechef.com/COOK130C/problems/WAV2
+ */
+
+package CodeChef.contest.COOK.JuneCookOff2021_130;
 
 import java.util.*;
 import java.io.*;
 
-public class N_Array {
+// Accepted --- 0.45sec
+class TheWave {
 
 	static PrintWriter pw;
-
-	void solve(int n, int[] a) {
-	}
+//	Set<Integer> zero = new HashSet<>();
+//	Map<Integer, String> memo = new HashMap<>();
 
 	private void run() {
 		read_write_file(); // comment this before submission
 		FastScanner fs = new FastScanner();
-		int t = fs.nextInt();
-		while (t-- > 0) {
-			int n = fs.nextInt();
-			int[] a = fs.readArray(n);
-			solve(n, a);
+		int n = fs.nextInt();
+		int q = fs.nextInt();
+		int[] a = fs.readArray(n);
+		Arrays.sort(a);
+		// tr(a);
+		for (int i = 0; i < q; i++) {
+			int x = fs.nextInt();
+//			if (zero.contains(x)) {
+//				pr(0);
+//				continue;
+//			}
+//			if (memo.containsKey(x)) {
+//				pr(memo.get(x));
+//				continue;
+//			}
+			int idx = Arrays.binarySearch(a, x);
+			// tr(x, idx);
+			if (idx >= 0) {
+				// zero.add(x);
+				pr(0);
+			} else {
+				int neg = n - (-idx) + 1;
+				// tr(neg);
+				String res = neg % 2 == 1 ? "NEGATIVE" : "POSITIVE";
+				// memo.put(idx, res);
+				pr(res);
+			}
 		}
 	}
 
@@ -38,7 +65,7 @@ public class N_Array {
 
 	public static void main(String[] args) {
 		pw = new PrintWriter(System.out);
-		new N_Array().run();
+		new TheWave().run();
 		pw.close();
 	}
 

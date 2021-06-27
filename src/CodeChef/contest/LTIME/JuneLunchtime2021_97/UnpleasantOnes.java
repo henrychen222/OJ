@@ -1,13 +1,60 @@
-package CodeForce.Template;
+/**
+ * 06/26/21 noon
+ * https://www.codechef.com/LTIME97C/problems/UNONE
+ */
+package CodeChef.contest.LTIME.JuneLunchtime2021_97;
 
 import java.util.*;
 import java.io.*;
 
-public class N_Array {
+class UnpleasantOnes {
 
 	static PrintWriter pw;
 
+	// Accepted --- 0.49sec https://www.codechef.com/viewsolution/48226464
+	/*
+	 * reference:
+	 * https://www.codechef.com/viewsolution/48126783
+	 * idea: greedy, concat all even, then all odd
+	 */
 	void solve(int n, int[] a) {
+		List<Integer> odd = new ArrayList<>();
+		List<Integer> even = new ArrayList<>();
+		for (int x : a) {
+			if (x % 2 == 0) {
+				even.add(x);
+			} else {
+				odd.add(x);
+			}
+		}
+		for (int x : even) {
+			pw.print(x + " ");
+		}
+		for (int x : odd) {
+			pw.print(x + " ");
+		}
+//		for (int i = 0; i < n; i++) {
+//			if (i % 2 == 0) {
+//				pw.print(odd.get(0));
+//				odd.remove(0);
+//			} else {
+//				pw.print(even.get(0));
+//				even.remove(0);
+//			}
+//			pw.print(" ");
+//		}
+		pr("");
+	}
+
+	// don't know
+	void solve1(int n, int[] a) {
+		String[][] d = new String[n][3];
+		for (int i = 0; i < n; i++) {
+			d[i][0] = Integer.toBinaryString(a[i]);
+			d[i][1] = i + "";
+			d[i][2] = a[i] + "";
+		}
+		tr(d);
 	}
 
 	private void run() {
@@ -38,7 +85,7 @@ public class N_Array {
 
 	public static void main(String[] args) {
 		pw = new PrintWriter(System.out);
-		new N_Array().run();
+		new UnpleasantOnes().run();
 		pw.close();
 	}
 

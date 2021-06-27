@@ -1,13 +1,35 @@
-package CodeForce.Template;
+/**
+ * 05/31/21 morning
+ * https://www.codechef.com/LTIME96C/problems/HOOPS
+ */
+
+package CodeChef.contest.LTIME.MayLunchtime2021_96;
 
 import java.util.*;
 import java.io.*;
 
-public class N_Array {
+class HoopJump {
 
 	static PrintWriter pw;
 
-	void solve(int n, int[] a) {
+	/*
+	 * 1 2 3 4 5  // 3
+	 */
+	// Accepted
+	void solve(int n) {
+//		int you = 1;
+//		int friend = n;
+//		int round = 1;
+//		while(true) {
+//			if (round % 2 == 1) {
+//				you++;
+//			} else {
+//				friend--;
+//			}
+//			round++;
+//			if (you == friend) break;
+//		}
+		prni(n / 2 + 1);
 	}
 
 	private void run() {
@@ -16,8 +38,7 @@ public class N_Array {
 		int t = fs.nextInt();
 		while (t-- > 0) {
 			int n = fs.nextInt();
-			int[] a = fs.readArray(n);
-			solve(n, a);
+			solve(n);
 		}
 	}
 
@@ -38,27 +59,27 @@ public class N_Array {
 
 	public static void main(String[] args) {
 		pw = new PrintWriter(System.out);
-		new N_Array().run();
+		new HoopJump().run();
 		pw.close();
 	}
 
-	void pr(int num) {
+	void prni(int num) {
 		pw.println(num);
 	}
 
-	void pr(long num) {
+	void prnl(long num) {
 		pw.println(num);
 	}
 
-	void pr(double num) {
+	void prnd(double num) {
 		pw.println(num);
 	}
 
-	void pr(String s) {
+	void prs(String s) {
 		pw.println(s);
 	}
 
-	void pr(char c) {
+	void prc(char c) {
 		pw.println(c);
 	}
 
