@@ -1,9 +1,0 @@
-2
-4
-ABBC
-6
-ABACDA
-
-1
-4
-ABBC
