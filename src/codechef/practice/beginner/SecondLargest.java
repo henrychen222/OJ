@@ -1,26 +1,21 @@
 /**
- * 06/29/21 morning
- * https://www.codechef.com/problems/LUCKFOUR
+ * 07/05/21 morning
+ * https://www.codechef.com/problems/FLOW017
  */
 
-package codechef.practice;
+package codechef.practice.beginner;
 
 import java.util.*;
 import java.io.*;
 
-class LuckyFour {
+class SecondLargest {
 
     static PrintWriter pw;
 
-    // Accepted --- 0.21sec https://www.codechef.com/viewsolution/48351167
-    void solve(String s) {
-        int res = 0;
-        int n = s.length();
-        for (int i = 0; i < n; i++) {
-            char c = s.charAt(i);
-            if (c == '4') res++;
-        }
-        pr(res);
+    // Accepted --- 0.07 sec https://www.codechef.com/viewsolution/48541159
+    void solve(int[] a) {
+        Arrays.sort(a);
+        pr(a[1]);
     }
 
     private void run() {
@@ -28,8 +23,8 @@ class LuckyFour {
         FastScanner fs = new FastScanner();
         int t = fs.nextInt();
         while (t-- > 0) {
-            String s = fs.next();
-            solve(s);
+            int[] a = fs.readArray(3);
+            solve(a);
         }
     }
 
@@ -50,7 +45,7 @@ class LuckyFour {
 
     public static void main(String[] args) {
         pw = new PrintWriter(System.out);
-        new LuckyFour().run();
+        new SecondLargest().run();
         pw.close();
     }
 

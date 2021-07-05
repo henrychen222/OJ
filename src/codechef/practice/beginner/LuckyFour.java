@@ -1,26 +1,24 @@
 /**
  * 06/29/21 morning
- * https://www.codechef.com/problems/FLOW007
+ * https://www.codechef.com/problems/LUCKFOUR
  */
 
-package codechef.practice;
+package codechef.practice.beginner;
 
 import java.util.*;
 import java.io.*;
 
-class ReverseNumber {
+class LuckyFour {
 
     static PrintWriter pw;
 
-    // Accepted --- 0.07sec https://www.codechef.com/viewsolution/48351309
+    // Accepted --- 0.21sec https://www.codechef.com/viewsolution/48351167
     void solve(String s) {
-        // tr(s);
-        String res = "";
+        int res = 0;
         int n = s.length();
-        for (int i = n - 1; i >= 0; i--) {
+        for (int i = 0; i < n; i++) {
             char c = s.charAt(i);
-            if (res.length() == 0 && c == '0') continue;
-            res += c;
+            if (c == '4') res++;
         }
         pr(res);
     }
@@ -52,7 +50,7 @@ class ReverseNumber {
 
     public static void main(String[] args) {
         pw = new PrintWriter(System.out);
-        new ReverseNumber().run();
+        new LuckyFour().run();
         pw.close();
     }
 

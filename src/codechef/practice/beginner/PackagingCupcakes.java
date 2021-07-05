@@ -1,20 +1,29 @@
 /**
- * 06/29/21 morning
- * https://www.codechef.com/problems/LUCKFOUR
+ * 07/05/21 morning
+ * https://www.codechef.com/problems/MUFFINS3
  */
 
-package codechef.practice;
+package codechef.practice.beginner;
 
 import java.util.*;
 import java.io.*;
 
-class FindingSquareRoots {
+class PackagingCupcakes {
 
     static PrintWriter pw;
 
-    // Accepted --- 0.05sec https://www.codechef.com/viewsolution/48351447
+    // Accepted --- 0.06 sec https://www.codechef.com/viewsolution/48542139
     void solve(int x) {
-        pr((int) Math.sqrt(x));
+//        pr("start " + x);
+//        for (int i = 1; i <= x; i++) {
+//            int leftover = x % i;
+//            tr(i, leftover);
+//        }
+        if (x % 2 == 1) {
+            pr((x + 1) / 2);
+        } else {
+            pr(x / 2 + 1);
+        }
     }
 
     private void run() {
@@ -44,7 +53,7 @@ class FindingSquareRoots {
 
     public static void main(String[] args) {
         pw = new PrintWriter(System.out);
-        new FindingSquareRoots().run();
+        new PackagingCupcakes().run();
         pw.close();
     }
 
