@@ -1,0 +1,19 @@
+5 23
+.......................
+...XXXXX.XXX..XXXXXXX..
+...X...X.X.X..X.....X..
+.XXXXX.X.XXX..X.XXX.X..
+.X.X.X.X......X.X.X.X..
+
+
+10 23
+.......................
+...XXXXX.XXX..XXXXXXX..
+...X...X.X.X..X.....X..
+.XXXXX.X.XXX..X.XXX.X..
+.X.X.X.X......X.X.X.X..
+.X.XXXXX..XXXXXXXXX.X..
+.X...X....X...X.X...X..
+.X.XXXXX..X.XXXXXXXXX..
+.X.X.X.X..X.X.X.X......
+.XXXXX.X..X.XXX.X.XX...
