@@ -1,5 +1,7 @@
 ///////////////////////////////// pre-define ////////////////////////////////////////////////////////////////////////////////
 const pr = console.log;
+const ll = BigInt;
+const int = parseInt;
 const mi = Math.min;
 const mx = Math.max;
 const mxbi = (...args) => args.reduce((m, e) => e > m ? e : m);
@@ -23,59 +25,61 @@ const stde = (a) => a.sort((x, y) => y - x);
 const counter = (a_or_s) => { let map = new Map(); for (const i of a_or_s) map.set(i, map.get(i) + 1 || 1); return map; };
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 /**
- * 05/20/21 night
+ * 05/20/21 night   09/06/21 night fixed
  * https://codeforces.com/contest/1527/problem/E
  */
 
+// TLE on case 13  https://codeforces.com/contest/1527/submission/128108670
+// pass in Java 
+// https://codeforces.com/contest/1527/submission/128109085
+// https://codeforces.com/contest/1527/submission/128109701
 function SegmentTreeRSQ(n) {
-    let tree = Array(2 * n).fill(0n);
-    let ma = Array(2 * n).fill(0n);
+    let tree = Array(2 * n).fill(0);
+    let ma = Array(2 * n).fill(0);
+    // pr("tree size", 2 * n)
     return { query, update }
 
     function query(l, r, tl = 0, tr = n, vi = 1) {
-        if (l >= tr || r <= tl) return 0n;
+        if (l >= tr || r <= tl) return Number.MAX_SAFE_INTEGER;
         if (l <= tl && r >= tr) return ma[vi];
-        return tree[vi] + mxbi(query(l, r, tl, tl + tr >> 1, vi * 2), query(l, r, tl + tr >> 1, tr, vi * 2 + 1));
+        return tree[vi] + mi(query(l, r, tl, int((tl + tr) / 2), vi * 2), query(l, r, int((tl + tr) / 2), tr, vi * 2 + 1));
     }
 
     function update(l, r, v, tl = 0, tr = n, vi = 1) {
         if (tl >= tr) return;
-        if (l <= tl && r >= tr) {
-            tree[vi] += BigInt(v);
-            ma[vi] += BigInt(v);
-        } else if (l < tr && r > tl) {
-            update(l, r, v, tl, tl + tr >> 1, vi * 2);
-            update(l, r, v, tl + tr >> 1, tr, vi * 2 + 1);
-            ma[vi] = tree[vi] + mxbi(ma[vi * 2], ma[vi * 2 + 1]);
+        if (l <= tl && tr <= r) {
+            tree[vi] += v;
+            ma[vi] += v;
+        } else if (tl < r && l < tr) {
+            update(l, r, v, tl, int((tl + tr) / 2), vi * 2);
+            update(l, r, v, int((tl + tr) / 2), tr, vi * 2 + 1);
+            ma[vi] = tree[vi] + mi(ma[vi * 2], ma[vi * 2 + 1]);
         }
     }
 }
 
-// issue
 const solve = (n, k, a) => {
     // pr(n, k, a);
-    let pre = Array(35001).fill(Number.M);
-    let p = Array(35001).fill(0);
-    pr(p);
+    let pre = Array(n + 1).fill(-1);  // issue here 0xff in c++ is -1
+    let p = Array(n + 1).fill(0);
     let dp = initialize2DArrayNew(k + 1, n + 1);
     for (let i = 0; i < n; i++) {
         p[i] = pre[a[i]];
         pre[a[i]] = i;
     }
-    pr(p, dp);
-    dp[0][0] = 0n;
+    dp[0][0] = 0;
     for (let i = 0; i < n; i++) {
-        dp[0][i + 1] = 1n << 60n;
+        dp[0][i + 1] = Number.MAX_SAFE_INTEGER;
     }
     for (let i = 1; i <= k; i++) {
         let st = new SegmentTreeRSQ(1 << 16);
         for (let j = 0; j < n; j++) st.update(j, j + 1, dp[i - 1][j]);
         for (let j = 0; j < n; j++) {
             if (p[j] >= 0) st.update(0, p[j] + 1, j - p[j]);
+            // pr("value", st.query(0, j + 1))
             dp[i][j + 1] = st.query(0, j + 1);
         }
     }
-    pr(dp);
     pr(dp[k][n]);
 };
 
