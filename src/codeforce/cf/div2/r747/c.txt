@@ -1,0 +1,15 @@
+2
+4 a
+aaab
+4 b
+bzyb
+
+
+1
+9 b
+bbbbbbcba
+
+1
+9 b
+cbbbbbbba
+
