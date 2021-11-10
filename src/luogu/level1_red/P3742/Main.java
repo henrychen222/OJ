@@ -1,17 +1,32 @@
 /**
- * 10/31/21 night created
+ * 11/08/21 morning
+ * https://www.luogu.com.cn/problem/P3742
  */
-package codeforce;
+package luogu.level1_red.P3742;
 
 import java.util.*;
 import java.io.*;
 
-public class input_output_template {
+class Main {
+
     static PrintWriter pw;
 
+    // Accepted --- https://www.luogu.com.cn/record/62055298
     private void run() {
-        read_write_file(); // keep this for input output problem
+        read_write_file(); // comment this before submission
         FastScanner fs = new FastScanner();
+        int n = fs.nextInt();
+        String x = fs.next(), y = fs.next();
+        String z = "";
+        for (int i = 0; i < n; i++) {
+            char cx = x.charAt(i), cy = y.charAt(i);
+            if (cx < cy) {
+                pr(-1);
+                return;
+            }
+            z += cy;
+        }
+        pr(z);
     }
 
     private final String INPUT = "input.txt";
@@ -25,13 +40,13 @@ public class input_output_template {
             outstream = new PrintStream(new FileOutputStream(OUTPUT));
             System.setIn(instream);
             System.setOut(outstream);
-            pw = new PrintWriter(new BufferedWriter(new FileWriter(OUTPUT)));
         } catch (Exception e) {
         }
     }
 
-    public static void main(String[] args) throws IOException {
-        new input_output_template().run();
+    public static void main(String[] args) {
+        pw = new PrintWriter(System.out);
+        new Main().run();
         pw.close();
     }
 

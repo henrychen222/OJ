@@ -1,17 +1,53 @@
 /**
- * 10/31/21 night created
+ * 11/07/21 morning
+ * https://atcoder.jp/contests/abc226/tasks/abc226_c
  */
-package codeforce;
+package atcoder.abc.r226.C;
 
 import java.util.*;
 import java.io.*;
 
-public class input_output_template {
+class Main {
+
     static PrintWriter pw;
 
+    // WA  AC 11 cases https://atcoder.jp/contests/abc226/submissions/27116547
+    long res;
+    void solve(int n, int[] t, int[][] a) {
+        // tr(t, a);
+        int[] f = a[n - 1];
+        res = t[n - 1];
+        for (int x : f) {
+            dfs(x, t, a, new HashSet<>());
+        }
+        pr(res);
+    }
+
+    void dfs(int cur, int[] t, int[][] a, Set<Integer> vis) {
+        int idx = cur - 1;
+        if (a[idx].length == 0) {
+            res += t[idx];
+            vis.add(cur);
+            return;
+        }
+        for (int child : a[idx]) {
+            if (vis.contains(child)) continue;
+            dfs(child, t, a, vis);
+        }
+    }
+
     private void run() {
-        read_write_file(); // keep this for input output problem
+        read_write_file(); // comment this before submission
         FastScanner fs = new FastScanner();
+        int n = fs.nextInt();
+        int[][] a = new int[n][];
+        int[] t = new int[n];
+        for (int i = 0; i < n; i++) {
+            t[i] = fs.nextInt();
+            int k = fs.nextInt();
+            a[i] = fs.readArray(k);
+        }
+        solve(n, t, a);
     }
 
     private final String INPUT = "input.txt";
@@ -25,13 +61,13 @@ public class input_output_template {
             outstream = new PrintStream(new FileOutputStream(OUTPUT));
             System.setIn(instream);
             System.setOut(outstream);
-            pw = new PrintWriter(new BufferedWriter(new FileWriter(OUTPUT)));
         } catch (Exception e) {
         }
     }
 
-    public static void main(String[] args) throws IOException {
-        new input_output_template().run();
+    public static void main(String[] args) {
+        pw = new PrintWriter(System.out);
+        new Main().run();
         pw.close();
     }
 

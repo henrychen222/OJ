@@ -1,17 +1,31 @@
 /**
- * 10/31/21 night created
+ * 11/05/21 evening
+ * https://codeforces.com/problemset/problem/157/B
  */
-package codeforce;
+package codeforce.practice.L1000;
 
 import java.util.*;
 import java.io.*;
 
-public class input_output_template {
+public class B157 {
+
     static PrintWriter pw;
 
+    // Accepted --- https://codeforces.com/problemset/submission/157/134444296
     private void run() {
-        read_write_file(); // keep this for input output problem
+        read_write_file(); // comment this before submission
         FastScanner fs = new FastScanner();
+        int n = fs.nextInt();
+        Integer[] a = fs.readArray(n);
+        Arrays.sort(a);
+        // tr(a);
+        int cnt = 0;
+        for (int i = n - 1; i - 1 >= 0; i -= 2) {
+            // tr(a[i], a[i - 1]);
+            cnt += Math.pow(a[i], 2) - Math.pow(a[i - 1], 2);
+        }
+        if (n % 2 != 0) cnt += Math.pow(a[0], 2);
+        pr(cnt * Math.PI);
     }
 
     private final String INPUT = "input.txt";
@@ -25,13 +39,13 @@ public class input_output_template {
             outstream = new PrintStream(new FileOutputStream(OUTPUT));
             System.setIn(instream);
             System.setOut(outstream);
-            pw = new PrintWriter(new BufferedWriter(new FileWriter(OUTPUT)));
         } catch (Exception e) {
         }
     }
 
-    public static void main(String[] args) throws IOException {
-        new input_output_template().run();
+    public static void main(String[] args) {
+        pw = new PrintWriter(System.out);
+        new B157().run();
         pw.close();
     }
 
@@ -73,8 +87,8 @@ public class input_output_template {
             return Integer.parseInt(next());
         }
 
-        int[] readArray(int n) {
-            int[] a = new int[n];
+        Integer[] readArray(int n) {
+            Integer[] a = new Integer[n];
             for (int i = 0; i < n; i++) a[i] = nextInt();
             return a;
         }

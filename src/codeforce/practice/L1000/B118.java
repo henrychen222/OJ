@@ -1,17 +1,42 @@
 /**
- * 10/31/21 night created
+ * 11/05/21 evening
+ * https://codeforces.com/problemset/problem/118/B
  */
-package codeforce;
+package codeforce.practice.L1000;
 
 import java.util.*;
 import java.io.*;
 
-public class input_output_template {
+public class B118 {
+
     static PrintWriter pw;
 
+    // Accepted --- https://codeforces.com/problemset/submission/118/134443231
     private void run() {
-        read_write_file(); // keep this for input output problem
+        read_write_file(); // comment this before submission
         FastScanner fs = new FastScanner();
+        int n = fs.nextInt();
+        int fn = 2 * n + 1 + 2 * n;
+        String[] res = new String[n + 1];
+        for (int i = 0; i <= n; i++) {
+            String s = "";
+            for (int x = 0; x <= i; x++) {
+                s += x;
+                s += " ";
+            }
+            for (int x = i - 1; x >= 0; x--) {
+                s += x;
+                if (x != 0) s += " ";
+            }
+            if (i == 0) s = s.substring(0, 1);
+            int rest = fn - s.length();
+            int h = rest / 2;
+            s = " ".repeat(h) + s;
+            res[i] = s;
+        }
+        // tr(res);
+        for (String s : res) pr(s);
+        for (int i = res.length - 2; i >= 0; i--) pr(res[i]);
     }
 
     private final String INPUT = "input.txt";
@@ -25,13 +50,13 @@ public class input_output_template {
             outstream = new PrintStream(new FileOutputStream(OUTPUT));
             System.setIn(instream);
             System.setOut(outstream);
-            pw = new PrintWriter(new BufferedWriter(new FileWriter(OUTPUT)));
         } catch (Exception e) {
         }
     }
 
-    public static void main(String[] args) throws IOException {
-        new input_output_template().run();
+    public static void main(String[] args) {
+        pw = new PrintWriter(System.out);
+        new B118().run();
         pw.close();
     }
 

@@ -1,17 +1,27 @@
 /**
- * 10/31/21 night created
+ * 11/07/21 morning
+ * https://atcoder.jp/contests/abc226/tasks/abc226_b
  */
-package codeforce;
+package atcoder.abc.r226.B;
 
 import java.util.*;
 import java.io.*;
 
-public class input_output_template {
+class Main {
+
     static PrintWriter pw;
 
-    private void run() {
-        read_write_file(); // keep this for input output problem
+    // Accepted
+    private void run() throws IOException {
+        read_write_file(); // comment this before submission
         FastScanner fs = new FastScanner();
+        int n = fs.nextInt();
+        Set<String> se = new HashSet<>();
+        for (int i = 0; i < n; i++) {
+            String s = fs.nextLine();
+            se.add(s);
+        }
+        pr(se.size());
     }
 
     private final String INPUT = "input.txt";
@@ -25,13 +35,13 @@ public class input_output_template {
             outstream = new PrintStream(new FileOutputStream(OUTPUT));
             System.setIn(instream);
             System.setOut(outstream);
-            pw = new PrintWriter(new BufferedWriter(new FileWriter(OUTPUT)));
         } catch (Exception e) {
         }
     }
 
     public static void main(String[] args) throws IOException {
-        new input_output_template().run();
+        pw = new PrintWriter(System.out);
+        new Main().run();
         pw.close();
     }
 
@@ -77,6 +87,10 @@ public class input_output_template {
             int[] a = new int[n];
             for (int i = 0; i < n; i++) a[i] = nextInt();
             return a;
+        }
+
+        String nextLine() throws IOException {
+            return br.readLine();
         }
 
         long nextLong() {

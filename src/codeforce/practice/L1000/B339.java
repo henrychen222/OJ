@@ -1,17 +1,37 @@
 /**
- * 10/31/21 night created
+ * 11/05/21 evening
+ * https://codeforces.com/problemset/problem/339/B
  */
-package codeforce;
+package codeforce.practice.L1000;
 
 import java.util.*;
 import java.io.*;
 
-public class input_output_template {
+public class B339 {
+
     static PrintWriter pw;
 
+    // Accepted --- https://codeforces.com/problemset/submission/339/134448009
     private void run() {
-        read_write_file(); // keep this for input output problem
+        read_write_file();
         FastScanner fs = new FastScanner();
+        int n = fs.nextInt(), m = fs.nextInt();
+        int[] a = fs.readArray(m);
+        long res = 0, cur = 1;
+        for (int x : a) {
+            if (cur <= x) {
+                res += x - cur;
+                // tr(cur, x, "add1", x - cur);
+            } else {
+                res += n - cur;
+                // tr(cur, n, "add2", n - cur);
+                res += (x - 1) + 1;
+                // tr(n, x, "add3", (x - 1) + 1);
+            }
+            cur = x;
+            // tr("res", res, "cur", cur);
+        }
+        pr(res);
     }
 
     private final String INPUT = "input.txt";
@@ -25,13 +45,13 @@ public class input_output_template {
             outstream = new PrintStream(new FileOutputStream(OUTPUT));
             System.setIn(instream);
             System.setOut(outstream);
-            pw = new PrintWriter(new BufferedWriter(new FileWriter(OUTPUT)));
         } catch (Exception e) {
         }
     }
 
     public static void main(String[] args) throws IOException {
-        new input_output_template().run();
+        pw = new PrintWriter(System.out);
+        new B339().run();
         pw.close();
     }
 

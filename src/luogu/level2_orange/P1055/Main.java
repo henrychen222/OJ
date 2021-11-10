@@ -1,17 +1,43 @@
 /**
- * 10/31/21 night created
+ * 11/08/21 morning
+ * https://www.luogu.com.cn/problem/P1055
  */
-package codeforce;
+package luogu.level2_orange.P1055;
 
 import java.util.*;
 import java.io.*;
 
-public class input_output_template {
+class Main {
+
     static PrintWriter pw;
 
+    // Accepted --- https://www.luogu.com.cn/record/62060142
     private void run() {
-        read_write_file(); // keep this for input output problem
+        read_write_file(); // comment this before submission
         FastScanner fs = new FastScanner();
+        String s = fs.next();
+        int n = 13;
+        char last = s.charAt(n - 1);
+        long sum = 0, cnt = 1;
+        for (int i = 0; i < n - 2; i++) {
+            if (i == 1 || i == 5) continue;
+            sum += cnt * (s.charAt(i) - '0');
+            cnt++;
+        }
+        long mod = sum % 11;
+        if (mod == 10) {
+            if (last == 'X') {
+                pr("Right");
+            } else {
+                pr(s.substring(0, n - 1) + 'X');
+            }
+        } else {
+            if (last - '0' == mod) {
+                pr("Right");
+            } else {
+                pr(s.substring(0, n - 1) + mod);
+            }
+        }
     }
 
     private final String INPUT = "input.txt";
@@ -25,13 +51,13 @@ public class input_output_template {
             outstream = new PrintStream(new FileOutputStream(OUTPUT));
             System.setIn(instream);
             System.setOut(outstream);
-            pw = new PrintWriter(new BufferedWriter(new FileWriter(OUTPUT)));
         } catch (Exception e) {
         }
     }
 
-    public static void main(String[] args) throws IOException {
-        new input_output_template().run();
+    public static void main(String[] args) {
+        pw = new PrintWriter(System.out);
+        new Main().run();
         pw.close();
     }
 

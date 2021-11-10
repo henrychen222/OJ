@@ -1,17 +1,55 @@
 /**
- * 10/31/21 night created
+ * 11/05/21 evening
+ * https://codeforces.com/problemset/problem/125/B
  */
-package codeforce;
+package codeforce.practice.L1000;
 
 import java.util.*;
 import java.io.*;
 
-public class input_output_template {
+public class B125 {
+
     static PrintWriter pw;
 
+    // Accepted --- https://codeforces.com/problemset/submission/125/134449662  a little tricky
     private void run() {
-        read_write_file(); // keep this for input output problem
+        read_write_file(); // comment this before submission
         FastScanner fs = new FastScanner();
+        String ss = fs.next();
+        List<String> d = new ArrayList<>();
+        for (int i = 0; i < ss.length(); i++) {
+            char c = ss.charAt(i);
+            if (c != '<' && c != '>' && c != '/') {
+                d.add(ss.charAt(i - 1) == '/' ? "/" + c : c + "");
+            }
+        }
+        // tr(d);
+        int n = d.size();
+        String[][] a = new String[n][];
+        Set<Integer> used = new HashSet<>();
+        for (int i = 0; i < n; i++) {
+            String s = d.get(i);
+            if (s.charAt(0) == '/') {
+                for (int j = i - 1; j >= 0; j--) { // look for matched height
+                    if (!used.contains(j) && a[j] != null && a[j][0].equals(s.substring(1))) {
+                        a[i] = new String[]{"/" + a[j][0], a[j][1]};
+                        used.add(j);
+                        break;
+                    }
+                }
+            } else {
+                int ignore = 0;
+                for (int j = i; j >= 0; j--) {
+                    if (d.get(j).charAt(0) == '/') {
+                        ignore += 2;
+                    }
+                }
+                int h = i - ignore;
+                a[i] = new String[]{s, h + ""};
+            }
+        }
+        // tr(a);
+        for (String[] e : a) pr(" ".repeat(Integer.parseInt(e[1]) * 2) + "<" + e[0] + ">");
     }
 
     private final String INPUT = "input.txt";
@@ -25,13 +63,13 @@ public class input_output_template {
             outstream = new PrintStream(new FileOutputStream(OUTPUT));
             System.setIn(instream);
             System.setOut(outstream);
-            pw = new PrintWriter(new BufferedWriter(new FileWriter(OUTPUT)));
         } catch (Exception e) {
         }
     }
 
     public static void main(String[] args) throws IOException {
-        new input_output_template().run();
+        pw = new PrintWriter(System.out);
+        new B125().run();
         pw.close();
     }
 

@@ -1,17 +1,32 @@
 /**
- * 10/31/21 night created
+ * 11/08/21 evening
+ * https://leetcode-cn.com/problems/SDRaNt/
  */
-package codeforce;
+package leetcodecn.meituan2021;
 
 import java.util.*;
 import java.io.*;
 
-public class input_output_template {
+public class A4 {
     static PrintWriter pw;
 
+    // Accepted --- 156ms 90.74%
+    // 题解 --- https://leetcode-cn.com/problems/SDRaNt/solution/javazhi-jie-jie-156ms-9074-by-coffeehenr-xsr6/
     private void run() {
-        read_write_file(); // keep this for input output problem
+        read_write_file();
         FastScanner fs = new FastScanner();
+        int n = fs.nextInt();
+        boolean[] visit = new boolean[n];
+        for (int i = 0; i < n; i++) {
+            int[] a = fs.readArray(n);
+            for (int x : a) {
+                if (!visit[x - 1]) {
+                    visit[x - 1] = true;
+                    pw.print(x + " ");
+                    break;
+                }
+            }
+        }
     }
 
     private final String INPUT = "input.txt";
@@ -25,13 +40,13 @@ public class input_output_template {
             outstream = new PrintStream(new FileOutputStream(OUTPUT));
             System.setIn(instream);
             System.setOut(outstream);
-            pw = new PrintWriter(new BufferedWriter(new FileWriter(OUTPUT)));
         } catch (Exception e) {
         }
     }
 
     public static void main(String[] args) throws IOException {
-        new input_output_template().run();
+        pw = new PrintWriter(System.out);
+        new A4().run();
         pw.close();
     }
 

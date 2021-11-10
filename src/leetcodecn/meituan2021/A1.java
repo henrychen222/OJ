@@ -1,17 +1,47 @@
 /**
- * 10/31/21 night created
+ * 11/05/21 afternoon
+ * https://leetcode-cn.com/problems/BaR9fy/
  */
-package codeforce;
+package leetcodecn.meituan2021;
 
 import java.util.*;
 import java.io.*;
 
-public class input_output_template {
+public class A1 {
     static PrintWriter pw;
 
+    // Accepted --- 76ms 99.64%
+    // 题解 https://leetcode-cn.com/problems/BaR9fy/solution/java-zhi-jie-jie-76ms-faster-than-9964-b-wma2/
+    void solve(String s) {
+        int n = s.length();
+        int a = 0, b = 0;
+        for (int i = 0; i < n; i++) {
+            char c = s.charAt(i);
+            if (!Character.isLowerCase(c) && !Character.isUpperCase(c)) {
+                if (i == 0 || !Character.isDigit(c)) {
+                    pr("Wrong");
+                    return;
+                }
+            } else {
+                a++;
+            }
+            if (Character.isDigit(c)) b++;
+        }
+        if (a >= 1 && b >= 1) {
+            pr("Accept");
+        } else {
+            pr("Wrong");
+        }
+    }
+
     private void run() {
-        read_write_file(); // keep this for input output problem
+        read_write_file();
         FastScanner fs = new FastScanner();
+        int cas = fs.nextInt();
+        while (cas-- > 0) {
+            String s = fs.next();
+            solve(s);
+        }
     }
 
     private final String INPUT = "input.txt";
@@ -25,13 +55,13 @@ public class input_output_template {
             outstream = new PrintStream(new FileOutputStream(OUTPUT));
             System.setIn(instream);
             System.setOut(outstream);
-            pw = new PrintWriter(new BufferedWriter(new FileWriter(OUTPUT)));
         } catch (Exception e) {
         }
     }
 
     public static void main(String[] args) throws IOException {
-        new input_output_template().run();
+        pw = new PrintWriter(System.out);
+        new A1().run();
         pw.close();
     }
 
@@ -75,7 +105,15 @@ public class input_output_template {
 
         int[] readArray(int n) {
             int[] a = new int[n];
-            for (int i = 0; i < n; i++) a[i] = nextInt();
+            for (int i = 0; i < n; i++)
+                a[i] = nextInt();
+            return a;
+        }
+
+        Integer[] readIntegerArray(int n) {
+            Integer[] a = new Integer[n];
+            for (int i = 0; i < n; i++)
+                a[i] = nextInt();
             return a;
         }
 

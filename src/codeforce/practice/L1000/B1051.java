@@ -1,17 +1,25 @@
 /**
- * 10/31/21 night created
+ * 11/08/21 morning
+ * https://codeforces.com/problemset/problem/1051/B
  */
-package codeforce;
+package codeforce.practice.L1000;
 
 import java.util.*;
 import java.io.*;
 
-public class input_output_template {
+public class B1051 {
+
     static PrintWriter pw;
 
+    // Accepted --- https://codeforces.com/problemset/submission/1051/134663855
     private void run() {
-        read_write_file(); // keep this for input output problem
+        read_write_file();
         FastScanner fs = new FastScanner();
+        long l = fs.nextLong(), r = fs.nextLong();
+        pr("YES");
+        for (long i = l; i < r; i += 2) {
+            pr(i + " " + (i + 1));
+        }
     }
 
     private final String INPUT = "input.txt";
@@ -25,13 +33,13 @@ public class input_output_template {
             outstream = new PrintStream(new FileOutputStream(OUTPUT));
             System.setIn(instream);
             System.setOut(outstream);
-            pw = new PrintWriter(new BufferedWriter(new FileWriter(OUTPUT)));
         } catch (Exception e) {
         }
     }
 
     public static void main(String[] args) throws IOException {
-        new input_output_template().run();
+        pw = new PrintWriter(System.out);
+        new B1051().run();
         pw.close();
     }
 

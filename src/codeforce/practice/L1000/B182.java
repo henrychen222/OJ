@@ -1,17 +1,25 @@
 /**
- * 10/31/21 night created
+ * 11/05/21 evening
+ * https://codeforces.com/problemset/problem/182/B
  */
-package codeforce;
+package codeforce.practice.L1000;
 
 import java.util.*;
 import java.io.*;
 
-public class input_output_template {
+public class B182 {
+
     static PrintWriter pw;
 
+    // Accepted --- https://codeforces.com/problemset/submission/182/134446150
     private void run() {
-        read_write_file(); // keep this for input output problem
+        read_write_file(); // comment this before submission
         FastScanner fs = new FastScanner();
+        int d = fs.nextInt(), m = fs.nextInt();
+        int[] a = fs.readArray(m);
+        long res = 0;
+        for (int i = 0; i < m - 1; i++) res += d - a[i]; // 最后一个不用调整, clock回拨1, ai <= d 一定够
+        pr(res);
     }
 
     private final String INPUT = "input.txt";
@@ -25,13 +33,13 @@ public class input_output_template {
             outstream = new PrintStream(new FileOutputStream(OUTPUT));
             System.setIn(instream);
             System.setOut(outstream);
-            pw = new PrintWriter(new BufferedWriter(new FileWriter(OUTPUT)));
         } catch (Exception e) {
         }
     }
 
-    public static void main(String[] args) throws IOException {
-        new input_output_template().run();
+    public static void main(String[] args) {
+        pw = new PrintWriter(System.out);
+        new B182().run();
         pw.close();
     }
 

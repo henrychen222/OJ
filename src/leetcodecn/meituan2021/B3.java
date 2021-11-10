@@ -1,17 +1,44 @@
 /**
- * 10/31/21 night created
+ * 11/08/21 morning
+ * https://leetcode-cn.com/problems/z3XKBp/
  */
-package codeforce;
+package leetcodecn.meituan2021;
 
 import java.util.*;
 import java.io.*;
 
-public class input_output_template {
+public class B3 {
     static PrintWriter pw;
 
+    // Accepted --- 96ms 73.61%
+    // 题解 https://leetcode-cn.com/problems/z3XKBp/solution/java-zhao-zuo-you-duan-dian-96ms-7361-by-w8p9/
     private void run() {
-        read_write_file(); // keep this for input output problem
+        read_write_file();
         FastScanner fs = new FastScanner();
+        int n = fs.nextInt();
+        String s = fs.next();
+        char[] a = s.toCharArray();
+        int left = -1, right = -1;
+        boolean leftFindM = false, rightFindT = false;
+        for (int i = 0; i < n; i++) {
+            if (a[i] == 'M') leftFindM = true;
+            if (leftFindM) {
+                if (a[i] == 'T') {
+                    left = i;
+                    break;
+                }
+            }
+        }
+        for (int i = n - 1; i >= 0; i--) {
+            if (a[i] == 'T') rightFindT = true;
+            if (rightFindT) {
+                if (a[i] == 'M') {
+                    right = i;
+                    break;
+                }
+            }
+        }
+        pr(s.substring(left + 1, right));
     }
 
     private final String INPUT = "input.txt";
@@ -25,13 +52,13 @@ public class input_output_template {
             outstream = new PrintStream(new FileOutputStream(OUTPUT));
             System.setIn(instream);
             System.setOut(outstream);
-            pw = new PrintWriter(new BufferedWriter(new FileWriter(OUTPUT)));
         } catch (Exception e) {
         }
     }
 
     public static void main(String[] args) throws IOException {
-        new input_output_template().run();
+        pw = new PrintWriter(System.out);
+        new B3().run();
         pw.close();
     }
 

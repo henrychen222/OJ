@@ -1,17 +1,35 @@
 /**
- * 10/31/21 night created
+ * 11/05/21 evening
+ * https://codeforces.com/problemset/problem/268/B
  */
-package codeforce;
+package codeforce.practice.L1000;
 
 import java.util.*;
 import java.io.*;
 
-public class input_output_template {
+public class B268 {
+
     static PrintWriter pw;
 
+    /*
+        // 第二个失败了要重头来, 不是接着试第二个
+        1   1
+        2   2 + (1 * 1)
+        3   3 + (2 * 1) + (1 * 2)
+        4   4 + (3 * 1) + (2 * 2) + (1 * 3)
+        10  10 + (9 * 1) + (8 * 2)
+     */
+    // Accepted --- https://codeforces.com/problemset/submission/268/134445592
     private void run() {
-        read_write_file(); // keep this for input output problem
+        read_write_file(); // comment this before submission
         FastScanner fs = new FastScanner();
+        int n = fs.nextInt();
+        long res = n;
+        for (int i = 1; i < n; i++) {
+            // tr(n - i, i);
+            res += (long) (n - i) * i;
+        }
+        pr(res);
     }
 
     private final String INPUT = "input.txt";
@@ -25,13 +43,13 @@ public class input_output_template {
             outstream = new PrintStream(new FileOutputStream(OUTPUT));
             System.setIn(instream);
             System.setOut(outstream);
-            pw = new PrintWriter(new BufferedWriter(new FileWriter(OUTPUT)));
         } catch (Exception e) {
         }
     }
 
-    public static void main(String[] args) throws IOException {
-        new input_output_template().run();
+    public static void main(String[] args) {
+        pw = new PrintWriter(System.out);
+        new B268().run();
         pw.close();
     }
 
@@ -73,8 +91,8 @@ public class input_output_template {
             return Integer.parseInt(next());
         }
 
-        int[] readArray(int n) {
-            int[] a = new int[n];
+        Integer[] readArray(int n) {
+            Integer[] a = new Integer[n];
             for (int i = 0; i < n; i++) a[i] = nextInt();
             return a;
         }

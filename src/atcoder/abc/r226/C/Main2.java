@@ -1,17 +1,52 @@
 /**
- * 10/31/21 night created
+ * 11/07/21 morning
+ * https://atcoder.jp/contests/abc226/tasks/abc226_c
  */
-package codeforce;
+package atcoder.abc.r226.C;
 
 import java.util.*;
 import java.io.*;
 
-public class input_output_template {
+class Main2 {
+
     static PrintWriter pw;
 
+    // Accepted --- https://atcoder.jp/contests/abc226/submissions/27118358
+    // reference: tourist cuiaoxiang
+    void bfs(int n, int[] t, int[][] a) {
+        boolean[] visit = new boolean[n];
+        Queue<Integer> q = new LinkedList<>(Collections.singleton(n - 1));
+        visit[n - 1] = true;
+        while (!q.isEmpty()) {
+            int cur = q.poll();
+            // tr(cur);
+            for (int child : a[cur]) {
+                int idx = child - 1;
+                if (!visit[idx]) {
+                    visit[idx] = true;
+                    q.add(idx);
+                }
+            }
+        }
+        long res = 0;
+        for (int i = 0; i < n; i++) {
+            if (visit[i]) res += t[i];
+        }
+        pr(res);
+    }
+
     private void run() {
-        read_write_file(); // keep this for input output problem
+        read_write_file(); // comment this before submission
         FastScanner fs = new FastScanner();
+        int n = fs.nextInt();
+        int[][] a = new int[n][];
+        int[] t = new int[n];
+        for (int i = 0; i < n; i++) {
+            t[i] = fs.nextInt();
+            int k = fs.nextInt();
+            a[i] = fs.readArray(k);
+        }
+        bfs(n, t, a);
     }
 
     private final String INPUT = "input.txt";
@@ -25,13 +60,13 @@ public class input_output_template {
             outstream = new PrintStream(new FileOutputStream(OUTPUT));
             System.setIn(instream);
             System.setOut(outstream);
-            pw = new PrintWriter(new BufferedWriter(new FileWriter(OUTPUT)));
         } catch (Exception e) {
         }
     }
 
-    public static void main(String[] args) throws IOException {
-        new input_output_template().run();
+    public static void main(String[] args) {
+        pw = new PrintWriter(System.out);
+        new Main2().run();
         pw.close();
     }
 

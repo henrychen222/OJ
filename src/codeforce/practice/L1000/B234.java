@@ -1,17 +1,26 @@
 /**
- * 10/31/21 night created
+ * 11/05/21 evening
+ * https://codeforces.com/problemset/problem/234/B
  */
-package codeforce;
+package codeforce.practice.L1000;
 
 import java.util.*;
 import java.io.*;
 
-public class input_output_template {
+public class B234 {
     static PrintWriter pw;
 
+    // Accepted --- https://codeforces.com/problemset/submission/234/134443867
     private void run() {
         read_write_file(); // keep this for input output problem
         FastScanner fs = new FastScanner();
+        int n = fs.nextInt(), k = fs.nextInt();
+        int[][] a = new int[n][];
+        for (int i = 0; i < n; i++) a[i] = new int[]{fs.nextInt(), i + 1};
+        Arrays.sort(a, (x, y) -> y[0] - x[0]);
+        // tr(a);
+        pr(a[k - 1][0]);
+        for (int i = 0; i < k; i++) pw.print(a[i][1] + " ");
     }
 
     private final String INPUT = "input.txt";
@@ -31,7 +40,7 @@ public class input_output_template {
     }
 
     public static void main(String[] args) throws IOException {
-        new input_output_template().run();
+        new B234().run();
         pw.close();
     }
 

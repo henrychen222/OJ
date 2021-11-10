@@ -1,17 +1,30 @@
 /**
- * 10/31/21 night created
+ * 11/08/21 morning
+ * https://codeforces.com/problemset/problem/1041/B
  */
-package codeforce;
+package codeforce.practice.L1000;
 
 import java.util.*;
 import java.io.*;
 
-public class input_output_template {
+public class B1041 {
+
     static PrintWriter pw;
 
+    // Accepted --- https://codeforces.com/problemset/submission/1041/134669845
     private void run() {
-        read_write_file(); // keep this for input output problem
+        read_write_file();
         FastScanner fs = new FastScanner();
+        long a = fs.nextLong(), b = fs.nextLong(), x = fs.nextLong(), y = fs.nextLong();
+        long g = gcd(x, y);
+        x /= g;
+        y /= g;
+        // tr(x, a / x, y, b / y);
+        pr(Math.min(a / x, b / y));
+    }
+
+    long gcd(long a, long b) {
+        return b == 0 ? a : gcd(b, a % b);
     }
 
     private final String INPUT = "input.txt";
@@ -25,13 +38,13 @@ public class input_output_template {
             outstream = new PrintStream(new FileOutputStream(OUTPUT));
             System.setIn(instream);
             System.setOut(outstream);
-            pw = new PrintWriter(new BufferedWriter(new FileWriter(OUTPUT)));
         } catch (Exception e) {
         }
     }
 
     public static void main(String[] args) throws IOException {
-        new input_output_template().run();
+        pw = new PrintWriter(System.out);
+        new B1041().run();
         pw.close();
     }
 

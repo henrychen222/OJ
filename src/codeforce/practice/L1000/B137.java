@@ -1,17 +1,33 @@
 /**
- * 10/31/21 night created
+ * 11/05/21 evening
+ * https://codeforces.com/problemset/problem/137/B
  */
-package codeforce;
+package codeforce.practice.L1000;
 
 import java.util.*;
 import java.io.*;
 
-public class input_output_template {
+public class B137 {
+
     static PrintWriter pw;
 
+    // Accepted --- https://codeforces.com/problemset/submission/137/134443507
     private void run() {
-        read_write_file(); // keep this for input output problem
+        read_write_file(); // comment this before submission
         FastScanner fs = new FastScanner();
+        int n = fs.nextInt(), res = 0;
+        int[] a = fs.readArray(n);
+        Map<Integer, Integer> m = new HashMap<>();
+        for (int x : a) m.put(x, m.getOrDefault(x, 0) + 1);
+        for (int x : m.keySet()) {
+            int occ = m.get(x);
+            if (x <= n) {
+                res += occ - 1;
+            } else {
+                res += occ;
+            }
+        }
+        pr(res);
     }
 
     private final String INPUT = "input.txt";
@@ -25,13 +41,13 @@ public class input_output_template {
             outstream = new PrintStream(new FileOutputStream(OUTPUT));
             System.setIn(instream);
             System.setOut(outstream);
-            pw = new PrintWriter(new BufferedWriter(new FileWriter(OUTPUT)));
         } catch (Exception e) {
         }
     }
 
-    public static void main(String[] args) throws IOException {
-        new input_output_template().run();
+    public static void main(String[] args) {
+        pw = new PrintWriter(System.out);
+        new B137().run();
         pw.close();
     }
 
