@@ -1,0 +1,59 @@
+NNNE
+1 2 3 1
+
+ENE     a[0] == a[1]     a[1] != a[2]       a[2] == a[0]
+NO
+
+EEN    a[0] = a[1]       a[1] = a[2]        a[2] != a[0]
+NO
+
+NNE    a[0] != a[1]      a[1] != a[2]       a[2] == a[0]
+1 2 1
+YES
+
+NEN    a[0] != a[1]      a[1] == a[2]       a[2] != a[0]
+1 2 2
+YES
+
+8
+ENE
+EEN
+NNE
+NEN
+NE
+EN
+NN
+EE
+
+
+6
+ENEN
+ENNN
+ENNE
+EEEN
+EENE
+NNNE
+
+ENEN
+1 1 2 2  YES
+
+ENNN
+1 1 2 3  YES
+
+ENNE
+1 2 3 1  YES
+
+EEEN
+1 1 1 2  NO
+
+EENE
+1 1 1 2  NO
+
+NNNE
+1 2 3 1  YES
+
+
+/////////////////////////////////////
+------ did not consider NEE -----
+NEE
+1 2 2

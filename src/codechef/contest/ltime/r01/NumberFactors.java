@@ -1,13 +1,38 @@
-package codechef.template;
+/**
+ * 01/19/22 evening
+ * https://www.codechef.com/LTIME01/problems/NUMFACT
+ */
+package codechef.contest.ltime.r01;
 
 import java.util.*;
 import java.io.*;
 
-class N_S {
-
+class NumberFactors {
     static PrintWriter pw;
 
-    void solve(int n, String s) {
+    void solve(int n, int[] a) {
+        long res = 0;
+        for (int i = 1; i <= n; i++) {
+            long add = combination(n, i);
+            tr(add);
+            res += add;
+        }
+        pr(res);
+    }
+
+    long combination(long m, long n) {
+        return factorial(m, n) / factorial(n, n);
+    }
+
+    long factorial(long m, long n) {
+        long num = 1;
+        long cnt = 0;
+        for (long i = m; i > 0; i--) {
+            if (cnt == n) break;
+            num *= i;
+            cnt++;
+        }
+        return num;
     }
 
     private void run() {
@@ -16,8 +41,8 @@ class N_S {
         int t = fs.nextInt();
         while (t-- > 0) {
             int n = fs.nextInt();
-            String s = fs.next();
-            solve(n, s);
+            int[] a = fs.readArray(n);
+            solve(n, a);
         }
     }
 
@@ -38,7 +63,7 @@ class N_S {
 
     public static void main(String[] args) {
         pw = new PrintWriter(System.out);
-        new N_S().run();
+        new NumberFactors().run();
         pw.close();
     }
 
@@ -82,15 +107,7 @@ class N_S {
 
         int[] readArray(int n) {
             int[] a = new int[n];
-            for (int i = 0; i < n; i++)
-                a[i] = nextInt();
-            return a;
-        }
-
-        Integer[] readIntegerArray(int n) {
-            Integer[] a = new Integer[n];
-            for (int i = 0; i < n; i++)
-                a[i] = nextInt();
+            for (int i = 0; i < n; i++) a[i] = nextInt();
             return a;
         }
 

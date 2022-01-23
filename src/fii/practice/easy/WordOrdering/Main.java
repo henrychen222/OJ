@@ -1,24 +1,47 @@
-package codechef.template;
+/**
+ * 11/21/21 afternoon
+ * https://csacademy.com/contest/archive/task/word_ordering/
+ */
+package fii.practice.easy.WordOrdering;
 
 import java.util.*;
 import java.io.*;
 
-class N_Array {
-
+class Main {
     static PrintWriter pw;
 
-    void solve(int n, int[] a) {
-    }
-
+    // Accepted --- https://csacademy.com/submission/3555705/
     private void run() {
         read_write_file(); // comment this before submission
         FastScanner fs = new FastScanner();
-        int t = fs.nextInt();
-        while (t-- > 0) {
-            int n = fs.nextInt();
-            int[] a = fs.readArray(n);
-            solve(n, a);
-        }
+        String s = fs.next();
+        int n = fs.nextInt();
+        String[] a = new String[n];
+        for (int i = 0; i < n; i++) a[i] = fs.next();
+        Arrays.sort(a, (x, y) -> {
+            int m = Math.min(x.length(), y.length());
+            for (int i = 0; i < m; i++) {
+                char cx = x.charAt(i), cy = y.charAt(i);
+                if (cx != cy) {
+                    if (Character.isLowerCase(cx)) {
+                        if (Character.isLowerCase(cy)) {
+                            return s.indexOf(cx) - s.indexOf(cy);
+                        } else {
+                            return -1;
+                        }
+                    } else {
+                        if (Character.isLowerCase(cy)) {
+                            return 1;
+                        } else {
+                            return s.indexOf(Character.toLowerCase(cx)) - s.indexOf(Character.toLowerCase(cy));
+                        }
+                    }
+                }
+            }
+            return x.length() - y.length();
+        });
+        // tr(a);
+        for (String e : a) pr(e);
     }
 
     private final String INPUT = "input.txt";
@@ -38,7 +61,7 @@ class N_Array {
 
     public static void main(String[] args) {
         pw = new PrintWriter(System.out);
-        new N_Array().run();
+        new Main().run();
         pw.close();
     }
 
@@ -82,15 +105,7 @@ class N_Array {
 
         int[] readArray(int n) {
             int[] a = new int[n];
-            for (int i = 0; i < n; i++)
-                a[i] = nextInt();
-            return a;
-        }
-
-        Integer[] readIntegerArray(int n) {
-            Integer[] a = new Integer[n];
-            for (int i = 0; i < n; i++)
-                a[i] = nextInt();
+            for (int i = 0; i < n; i++) a[i] = nextInt();
             return a;
         }
 
