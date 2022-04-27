@@ -2,28 +2,35 @@
  * 09/05/21 created
  */
 
+import com.sun.source.tree.Tree;
+
 import java.util.*;
 
 public class lib {
 
+    //////////////////// Map ////////////////////////////////
     Map<Integer, Integer> counter(int[] a) {
         Map<Integer, Integer> m = new HashMap<>();
         for (int x : a) m.put(x, m.getOrDefault(x, 0) + 1);
         return m;
     }
 
-    long factorial(int m, int n) {
-        long num = 1;
-        int cnt = 0;
-        for (int i = m; i > 0; i--) {
-            if (cnt == n) break;
-            num *= i;
-            cnt++;
-        }
-        return num;
+    <T> void addOneOrManyMap(TreeMap<T, Integer> m, T x, int... args) {
+        int cnt = args.length == 0 ? 1 : args[0];
+        m.put(x, m.getOrDefault(x, 0) + cnt);
     }
 
-    void sort_inc(int[] a) {
+    <T> void removeOneOrManyMap(TreeMap<T, Integer> m, T x, int... args) {
+        int cnt = args.length == 0 ? 1 : args[0], occ = m.get(x);
+        if (occ > cnt) {
+            m.put(x, occ - cnt);
+        } else {
+            m.remove(x);
+        }
+    }
+
+    ///////////////////////// Array //////////////////////////////////
+    void sortArray(int[] a) {
         shuffleArray(a);
         Arrays.sort(a);
     }
@@ -98,5 +105,4 @@ public class lib {
         }
         return idx;
     }
-
 }

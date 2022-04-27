@@ -27,10 +27,9 @@ public class G {
                     ds.union(u, v);
                 }
             }
-            // tr("check", ds.components);
-            if (ds.components > 1) {
-//                tr(ds.parent);
-//                tr(ds.components);
+            // tr("group", ds.components, "count", ds.count());
+            // if (ds.components > 1) {
+            if (ds.count() > 2) { // Accepted --- https://codeforces.com/contest/1624/submission/153998748 (04/18/22 morning)
                 res |= 1 << i;
             }
         }
@@ -68,7 +67,7 @@ public class G {
 
     class DJSet {
         int[] parent;
-        int components;
+        int components; // group trace
 
         DJSet(int n) {
             parent = new int[n + 1];
@@ -80,32 +79,38 @@ public class G {
             return parent[x] < 0 ? x : (parent[x] = find(parent[x]));
         }
 
+//        public boolean union(int x, int y) {
+//            x = find(x);
+//            y = find(y);
+//            if (x == y) return false;
+//            if (-parent[x] < -parent[y]) {
+//                int d = x;
+//                x = y;
+//                y = d;
+//            }
+//            parent[x] += parent[y];
+//            parent[y] = x;
+//            components--;
+//            return true;
+//        }
+
+        // Accepted --- https://codeforces.com/contest/1624/submission/153990308 (04/18/22 morning rewrite union() consistent with uwi's)
+        // Accepted --- https://codeforces.com/contest/1624/submission/153991938 (04/18/22 morning)
         public boolean union(int x, int y) {
             x = find(x);
             y = find(y);
-            if (x == y) return false;
-            if (-parent[x] < -parent[y]) {
-                int d = x;
-                x = y;
-                y = d;
+            if (x != y) {
+                // if (parent[x] > parent[y]) {
+                if (parent[x] < parent[y]) {
+                    int d = x;
+                    x = y;
+                    y = d;
+                }
+                parent[x] += parent[y];
+                parent[y] = x;
+                components--;
             }
-            parent[x] += parent[y];
-            parent[y] = x;
-            components--;
-            return true;
-
-//            x = find(x);
-//            y = find(y);
-//            if (x != y) {
-//                if (parent[y] < parent[x]) {
-//                    int d = x;
-//                    x = y;
-//                    y = d;
-//                }
-//                parent[x] += parent[y];
-//                parent[y] = x;
-//            }
-//            return x == y;
+            return x == y;
         }
 
         boolean equiv(int x, int y) {
