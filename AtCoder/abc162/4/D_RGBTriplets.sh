@@ -1,2 +1,0 @@
-javac D_RGBTriplets.java
-java D_RGBTriplets
