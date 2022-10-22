@@ -1,5 +1,5 @@
 /**
- * 02/18/22 evening
+ * 02/18/22 evening 08/26/22 night redo
  * https://www.hackerrank.com/challenges/equal/problem
  */
 package hackerrank.medium.s30;
@@ -10,33 +10,64 @@ import java.io.*;
 public class Equal {
     static PrintWriter pw;
 
+    // Accepted https://www.hackerrank.com/challenges/equal/submissions/code/287016862
+    // reference: https://github.com/BlakeBrown/HackerRank-Solutions/blob/master/Algorithms/Dynamic%20Programming/Equal%20-%20O(n)%20greedy.cpp
     void solve(int n, int[] a) {
-        TreeMap<Integer, Integer> m = new TreeMap<>();
-        for (int x : a) addOneOrManyMap(m, x);
-        tr(m);
-        int pre = 0;
-        long step = 0;
-        for (int x : m.keySet()) {
-            int diff = x - pre;
-            tr(x, "diff", diff, "step", step);
-            if (diff > 5) {
-                step += diff / 5;
-                diff %= 5;
-            }
-            if (diff == 4 || diff == 3) {
-                step += 2;
-            } else if (diff == 1 || diff == 2 || diff == 5) {
-                step++;
-            }
-            tr("after", step);
-            pre = x;
+        int min = Arrays.stream(a).min().getAsInt(), res = Integer.MAX_VALUE;
+        for (int i = 0; i < 4; i++) {
+            int move = 0;
+            for (int x : a) move += ops(x - min + i);
+            res = Math.min(res, move);
         }
-        pr(step);
+        pr(res);
     }
 
-    <T> void addOneOrManyMap(TreeMap<T, Integer> m, T x, int... args) {
-        int cnt = args.length == 0 ? 1 : args[0];
-        m.put(x, m.getOrDefault(x, 0) + cnt);
+    int ops(int n) {
+        int res = 0;
+        res += n / 5;
+        n %= 5;
+        res += n / 2;
+        n %= 2;
+        res += n;
+        return res;
+    }
+
+    ///////////////////////////////////////////////////////////////
+    // WA
+    void solve1(int n, int[] a) {
+        int[] u = removeDuplicatedSorted(a);
+        long pre = u[0], res = 0, add = 0;
+        // tr(u);
+        for (int i = 1; i < u.length; i++) {
+            long cur = u[i] + add;
+            long diff = cur - pre;
+            add += diff;
+            long move = calMove(pre, cur);
+            res += move;
+            // tr("cur", cur, "pre", pre, "diff", diff, "move", move);
+            pre = cur;
+        }
+        pr(res);
+    }
+
+    long calMove(long x, long y) {
+        int[] move = {0, 1, 1, 2, 2};
+        long diff = y - x, res = 0;
+        if (diff >= 5) {
+            res += diff / 5;
+            diff %= 5;
+        }
+        res += move[(int) diff];
+        return res;
+    }
+
+    int[] removeDuplicatedSorted(int[] a) {
+        TreeSet<Integer> ts = new TreeSet<>();
+        for (int x : a) ts.add(x);
+        int[] res = new int[ts.size()];
+        int p = 0;
+        for (int x : ts) res[p++] = x;
+        return res;
     }
 
     private void run() {
@@ -97,14 +128,6 @@ public class Equal {
             int[] a = new int[n];
             for (int i = 0; i < n; i++) a[i] = nextInt();
             return a;
-        }
-
-        long nextLong() {
-            return Long.parseLong(next());
-        }
-
-        double nextDouble() {
-            return Double.parseDouble(next());
         }
     }
 

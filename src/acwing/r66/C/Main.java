@@ -1,30 +1,42 @@
 /**
- * 03/04/22 afternoon
- * https://codeforces.com/contest/1646/problem/A
+ * 08/27/22 morning
+ * https://www.acwing.com/problem/content/4611/
  */
-package codeforce.practice.L800;
+package acwing.r66.C;
 
 import java.util.*;
 import java.io.*;
 
-public class A1646 {
+class Main {
     static PrintWriter pw;
 
-    // Accepted --- https://codeforces.com/contest/1646/submission/148400969
-    void solve(int n, long s) {
-        long t = (long) n * n;
-        pr(s / t);
+    void solve(int n, int[] a) {
+        Map<Integer, Integer> m = counter(a);
+        int one = 0;
+        for (int occ : m.values()) {
+            if (occ == 1) {
+                one++;
+            }
+        }
+        if (one % 2 != 0) {
+            pr("NO");
+            return;
+        }
+        pr("YES");
+    }
+
+    Map<Integer, Integer> counter(int[] a) {
+        Map<Integer, Integer> m = new HashMap<>();
+        for (int x : a) m.put(x, m.getOrDefault(x, 0) + 1);
+        return m;
     }
 
     private void run() {
         read_write_file(); // comment this before submission
         FastScanner fs = new FastScanner();
-        int t = fs.nextInt();
-        while (t-- > 0) {
-            int n = fs.nextInt();
-            long s = fs.nextLong();
-            solve(n, s);
-        }
+        int n = fs.nextInt();
+        int[] a = fs.readArray(n);
+        solve(n, a);
     }
 
     private final String INPUT = "input.txt";
@@ -44,7 +56,7 @@ public class A1646 {
 
     public static void main(String[] args) {
         pw = new PrintWriter(System.out);
-        new A1646().run();
+        new Main().run();
         pw.close();
     }
 
@@ -74,14 +86,6 @@ public class A1646 {
             int[] a = new int[n];
             for (int i = 0; i < n; i++) a[i] = nextInt();
             return a;
-        }
-
-        long nextLong() {
-            return Long.parseLong(next());
-        }
-
-        double nextDouble() {
-            return Double.parseDouble(next());
         }
     }
 

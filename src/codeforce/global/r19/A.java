@@ -1,6 +1,6 @@
 /**
- * 02/11/22 moring
- * https://codeforces.com/problemset/problem/427/B
+ * 02/12/22 morning
+ * https://codeforces.com/contest/1637/problem/A
  */
 package codeforce.global.r19;
 

@@ -1,30 +1,51 @@
 /**
- * 02/22/22 evening
- * https://codeforces.com/contest/1633/problem/B
+ * 06/08/22 morning
+ * https://www.codechef.com/START42C/problems/MODULO3
  */
-package codeforce.practice.L800;
+package codechef.contest.start.c_42;
 
 import java.util.*;
 import java.io.*;
 
-public class B1633 {
+class DivisibleBy3 {
     static PrintWriter pw;
+    long res;
+    Set<String> memo;
 
-    // Accepted --- https://codeforces.com/contest/1633/submission/147379521
-    void solve(char[] s) {
-        int zero = 0, one = 0;
-        for (char c : s) {
-            if (c == '0') {
-                zero++;
-            } else {
-                one++;
-            }
+    // Accepted
+    void solve(long a, long b) {
+        if (a % 3 == 0 || b % 3 == 0) {
+            pr(0);
+            return;
         }
-        if (zero == one) {
-            pr(zero - 1);
-        } else {
-            pr(Math.min(zero, one));
+        long diff = Math.abs(a - b);
+        if (diff % 3 == 0) {
+            pr(1);
+            return;
         }
+        pr(2);
+    }
+
+    // WA
+    void solve1(long a, long b) {
+        res = Long.MAX_VALUE;
+        memo = new HashSet<>();
+        dfs(a, b, 0);
+        pr(res);
+    }
+
+    void dfs(long a, long b, long step) {
+        // tr(a, b, step);
+        String ke = Math.min(a, b) + " " + Math.max(a, b);
+        if (memo.contains(ke)) return;
+        memo.add(ke);
+        if (a % 3 == 0 || b % 3 == 0) {
+            res = Math.min(res, step);
+            return;
+        }
+        long diff = Math.abs(a - b);
+        dfs(diff, b, step + 1);
+        dfs(a, diff, step + 1);
     }
 
     private void run() {
@@ -32,8 +53,8 @@ public class B1633 {
         FastScanner fs = new FastScanner();
         int t = fs.nextInt();
         while (t-- > 0) {
-            char[] s = fs.next().toCharArray();
-            solve(s);
+            long a = fs.nextLong(), b = fs.nextLong();
+            solve(a, b);
         }
     }
 
@@ -54,7 +75,7 @@ public class B1633 {
 
     public static void main(String[] args) {
         pw = new PrintWriter(System.out);
-        new B1633().run();
+        new DivisibleBy3().run();
         pw.close();
     }
 
@@ -88,10 +109,6 @@ public class B1633 {
 
         long nextLong() {
             return Long.parseLong(next());
-        }
-
-        double nextDouble() {
-            return Double.parseDouble(next());
         }
     }
 

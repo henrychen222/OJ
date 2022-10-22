@@ -10,6 +10,7 @@ import java.io.*;
 class IsScoreConsistent {
     static PrintWriter pw;
 
+    // Accepted
     void solve(int a, int b, int c, int d) {
         if (c < a || d < b) {
             pr("IMPOSSIBLE");

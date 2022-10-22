@@ -37,7 +37,7 @@ public class B14 {
     }
 
     // reference: https://leetcode.com/problems/merge-intervals/discuss/1239679/javascript-92ms-70.21
-    List<int[]> mergeIntervals(int[][] a) { // return final intersection, 交集  LC是并集
+    List<int[]> mergeIntervals(int[][] a) { // intersection: 交集
         // tr("in", a);
         Arrays.sort(a, (x, y) -> x[0] - y[0]);
         List<int[]> res = new ArrayList<>();
@@ -51,7 +51,7 @@ public class B14 {
             } else {
                 int[] pre = res.get(res.size() - 1);
                 res.remove(res.size() - 1);
-                int left = Math.max(pre[0], start); // 交集左边求大，右边求小, 并集相反
+                int left = Math.max(pre[0], start); // 交集左边求大，右边求小
                 int right = Math.min(pre[1], end);
                 res.add(new int[]{left, right});
                 preEnd = right;

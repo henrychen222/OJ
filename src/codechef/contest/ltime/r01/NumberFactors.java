@@ -1,5 +1,5 @@
 /**
- * 01/19/22 evening
+ * 01/19/22 evening 06/23/22 afternoon complete
  * https://www.codechef.com/LTIME01/problems/NUMFACT
  */
 package codechef.contest.ltime.r01;
@@ -10,30 +10,49 @@ import java.io.*;
 class NumberFactors {
     static PrintWriter pw;
 
+    // Accepted --- https://www.codechef.com/viewsolution/67461009
+    // reference: https://www.codechef.com/viewsolution/2302759
     void solve(int n, int[] a) {
-        long res = 0;
-        for (int i = 1; i <= n; i++) {
-            long add = combination(n, i);
-            tr(add);
-            res += add;
-        }
+        TreeMap<Integer, Integer> f = new TreeMap<>();
+        for (int x : a) factor(f, x);
+        // tr(f);
+        long res = 1;
+        for (int occ : f.values()) res *= occ + 1;
         pr(res);
     }
 
-    long combination(long m, long n) {
-        return factorial(m, n) / factorial(n, n);
+    void factor(TreeMap<Integer, Integer> m, int n) {
+        for (int i = 2; i * i <= n; i++) {
+            while (n % i == 0) {
+                m.put(i, m.getOrDefault(i, 0) + 1);
+                n /= i;
+            }
+        }
+        if (n > 1) m.put(n, m.getOrDefault(n, 0) + 1);
     }
 
-    long factorial(long m, long n) {
-        long num = 1;
-        long cnt = 0;
-        for (long i = m; i > 0; i--) {
-            if (cnt == n) break;
-            num *= i;
-            cnt++;
-        }
-        return num;
+    // TLE https://www.codechef.com/viewsolution/67459403
+    void solve1(int n, int[] a) {
+        int p = 1;
+        for (int x : a) p *= x;
+        pr(findAllFactors(p).size());
     }
+
+    TreeSet<Integer> findAllFactors(int n) {
+        TreeSet<Integer> res = new TreeSet<>();
+        for (int i = 1; i * i <= n; i++) {
+            if (n % i == 0) {
+                if (i == n / i) {
+                    res.add(i);
+                } else {
+                    res.add(i);
+                    res.add(n / i);
+                }
+            }
+        }
+        return res;
+    }
+
 
     private void run() {
         read_write_file(); // comment this before submission
@@ -109,14 +128,6 @@ class NumberFactors {
             int[] a = new int[n];
             for (int i = 0; i < n; i++) a[i] = nextInt();
             return a;
-        }
-
-        long nextLong() {
-            return Long.parseLong(next());
-        }
-
-        double nextDouble() {
-            return Double.parseDouble(next());
         }
     }
 

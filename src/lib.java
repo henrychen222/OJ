@@ -2,8 +2,6 @@
  * 09/05/21 created
  */
 
-import com.sun.source.tree.Tree;
-
 import java.util.*;
 
 public class lib {
@@ -27,6 +25,12 @@ public class lib {
         } else {
             m.remove(x);
         }
+    }
+
+    Map<Integer, ArrayList<Integer>> counter_value_in_indexA_in(int[] a) {
+        Map<Integer, ArrayList<Integer>> m = new HashMap<>();
+        for (int i = 0; i < a.length; i++) m.computeIfAbsent(a[i], x -> new ArrayList<>()).add(i);
+        return m;
     }
 
     ///////////////////////// Array //////////////////////////////////

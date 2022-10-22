@@ -1,50 +1,44 @@
 /**
- * 02/22/22 evening
- * https://codeforces.com/contest/1633/problem/A
+ * 05/24/22 noon
+ * https://codeforces.com/problemset/problem/501/B
  */
-package codeforce.practice.L800;
+package codeforce.practice.L1100;
 
 import java.util.*;
 import java.io.*;
 
-public class A1633 {
+public class B501 {
     static PrintWriter pw;
-    TreeSet<Integer> ts;
 
-    // Accepted --- https://codeforces.com/contest/1633/submission/147379023
-    void solve(int n) {
-        String s = n + "";
-        int l = ts.floor(n);
-        String sl = l + "";
-        if (sl.length() == s.length()) {
-            if (changeDigit(s, sl) == 1) { // case 20
-                pr(l);
-                return;
-            }
-        }
-        int r = ts.ceiling(n);
-        pr(r);
-    }
-
-    int changeDigit(String s, String sl) {
-        int cnt = 0;
-        for (int i = 0; i < s.length(); i++) {
-            if (s.charAt(i) != sl.charAt(i)) cnt++;
-        }
-        return cnt;
-    }
-
+    // Accepted --- https://codeforces.com/problemset/submission/501/158318722
     private void run() {
         read_write_file(); // comment this before submission
         FastScanner fs = new FastScanner();
-        ts = new TreeSet<>();
-        for (int i = 1; i * 7 < 1000; i++) ts.add(7 * i);
-        // tr(ts);
-        int t = fs.nextInt();
-        while (t-- > 0) {
-            int n = fs.nextInt();
-            solve(n);
+        int q = fs.nextInt();
+        Map<String, String> m = new HashMap<>();
+        while (q-- > 0) {
+            String s = fs.next(), t = fs.next();
+            m.put(s, t);
         }
+        while (true) {
+            boolean find = false;
+            for (String s : m.keySet()) {
+                String t = m.get(s);
+                if (m.containsKey(t)) {
+                    find = true;
+                    m.put(s, m.get(t));
+                    m.remove(t);
+                    break;
+                }
+            }
+            if (!find) break;
+        }
+        pr(m.size());
+        outputM(m);
+    }
+
+    void outputM(Map<String, String> m) {
+        for (String k : m.keySet()) pr(k + " " + m.get(k));
     }
 
     private final String INPUT = "input.txt";
@@ -64,7 +58,7 @@ public class A1633 {
 
     public static void main(String[] args) {
         pw = new PrintWriter(System.out);
-        new A1633().run();
+        new B501().run();
         pw.close();
     }
 
@@ -95,19 +89,9 @@ public class A1633 {
             for (int i = 0; i < n; i++) a[i] = nextInt();
             return a;
         }
-
-        long nextLong() {
-            return Long.parseLong(next());
-        }
-
-        double nextDouble() {
-            return Double.parseDouble(next());
-        }
     }
 
     void tr(Object... o) {
         pw.println(Arrays.deepToString(o));
     }
 }
-
-

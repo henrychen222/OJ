@@ -17,6 +17,10 @@ public class Solution {
         new Solution().run();
     }
 
+    <T> void pr(T t) {
+        System.out.println(t);
+    }
+
     void tr(Object... o) {
         System.out.println(Arrays.deepToString(o));
     }

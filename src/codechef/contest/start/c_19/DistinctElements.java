@@ -1,5 +1,5 @@
 /**
- * 12/11/21 morning
+ * 12/11/21 morning 06/26/22 afternoon complete
  * https://www.codechef.com/START19C/problems/DISTELE
  */
 package codechef.contest.start.c_19;
@@ -11,9 +11,31 @@ class DistinctElements {
     static PrintWriter pw;
     private final int mod = (int) (1e9 + 7);
 
+    // Accepted --- https://www.codechef.com/viewsolution/67692008
+    // reference: https://discuss.codechef.com/t/distele-editorial/96912
+    void solve(int n, int[] a) {
+        pr(countDistinctSubsequence(a));
+    }
+
+    long countDistinctSubsequence(int[] a) {
+        Arrays.sort(a);
+        int n = a.length;
+        long res = 1;
+        for (int i = 0; i < n; ) {
+            int r = i;
+            while (r < n && a[r] == a[i]) r++;
+            int len = r - i + 1;
+            res *= len;
+            res %= mod;
+            i = r;
+        }
+        res--;
+        return res % mod;
+    }
+
     // reference: https://www.geeksforgeeks.org/count-distinct-subsequences/
     // TLE WA https://www.codechef.com/viewsolution/54903691
-    void solve(int n, int[] a) {
+    void solve1(int n, int[] a) {
         int[] last = new int[1000005];
         Arrays.fill(last, -1);
         long[] dp = new long[n + 1];
@@ -59,24 +81,8 @@ class DistinctElements {
         pw.close();
     }
 
-    void pr(int num) {
-        pw.println(num);
-    }
-
-    void pr(long num) {
-        pw.println(num);
-    }
-
-    void pr(double num) {
-        pw.println(num);
-    }
-
-    void pr(String s) {
-        pw.println(s);
-    }
-
-    void pr(char c) {
-        pw.println(c);
+    <T> void pr(T t) {
+        pw.println(t);
     }
 
     class FastScanner {
@@ -101,14 +107,6 @@ class DistinctElements {
             int[] a = new int[n];
             for (int i = 0; i < n; i++) a[i] = nextInt();
             return a;
-        }
-
-        long nextLong() {
-            return Long.parseLong(next());
-        }
-
-        double nextDouble() {
-            return Double.parseDouble(next());
         }
     }
 

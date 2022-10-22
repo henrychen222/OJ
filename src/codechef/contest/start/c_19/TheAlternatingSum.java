@@ -1,5 +1,5 @@
 /**
- * 12/11/21 morning
+ * 12/11/21 morning 06/26/22 afternoon complete
  * https://www.codechef.com/START19C/problems/ALTERSUM
  */
 package codechef.contest.start.c_19;
@@ -10,7 +10,39 @@ import java.io.*;
 class TheAlternatingSum {
     static PrintWriter pw;
 
+    // Accepted --- https://www.codechef.com/viewsolution/67692420
+    // reference: https://discuss.codechef.com/t/altersum-editorial/96903
     void solve(int n, int[] a) {
+        pr(maximumAlternatingSum(a));
+    }
+
+    long maximumAlternatingSum(int[] a) {
+        int n = a.length;
+        long suf = 0, pref = 0, maxPref = 0;
+        for (int i = 0; i < n; i++) {
+            if (i % 2 == 0) {
+                suf += a[i];
+            } else {
+                suf -= a[i];
+            }
+        }
+        long res = suf;
+        for (int i = 0; i < n; i++) {
+            if (i % 2 == 0) {
+                suf -= a[i];
+                pref += a[i];
+            } else {
+                suf += a[i];
+                pref -= a[i];
+            }
+            if (i % 2 != n % 2) {
+                res = Math.max(res, pref - suf);
+                maxPref = Math.max(maxPref, pref);
+            } else {
+                res = Math.max(res, 2 * maxPref - pref - suf);
+            }
+        }
+        return res;
     }
 
     private void run() {
@@ -45,24 +77,8 @@ class TheAlternatingSum {
         pw.close();
     }
 
-    void pr(int num) {
-        pw.println(num);
-    }
-
-    void pr(long num) {
-        pw.println(num);
-    }
-
-    void pr(double num) {
-        pw.println(num);
-    }
-
-    void pr(String s) {
-        pw.println(s);
-    }
-
-    void pr(char c) {
-        pw.println(c);
+    <T> void pr(T t) {
+        pw.println(t);
     }
 
     class FastScanner {
@@ -87,14 +103,6 @@ class TheAlternatingSum {
             int[] a = new int[n];
             for (int i = 0; i < n; i++) a[i] = nextInt();
             return a;
-        }
-
-        long nextLong() {
-            return Long.parseLong(next());
-        }
-
-        double nextDouble() {
-            return Double.parseDouble(next());
         }
     }
 
