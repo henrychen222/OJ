@@ -62,6 +62,10 @@ public class F {
         return x;
     }
 
+//    long minus_mod(long x, long y) { // use this
+//        return ((x - y) % mod + mod) % mod;
+//    }
+
     long multi_mod(long x, long y) {
         return x * y % mod;
     }

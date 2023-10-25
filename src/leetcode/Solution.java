@@ -7,7 +7,7 @@ import java.util.*;
 
 public class Solution {
 
-    void solve() {
+    public void solve() {
     }
 
     public void run() {

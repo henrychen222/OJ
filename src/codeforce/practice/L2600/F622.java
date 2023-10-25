@@ -11,20 +11,23 @@ public class F622 {
     static PrintWriter pw;
     final int mod = (int) 1e9 + 7;
 
-    long[] comb_init(int N) {
-        long[] fact = new long[N];
-        fact[0] = 1;
-        for (int i = 1; i < N; i++) fact[i] = fact[i - 1] * i % mod;
-        return fact;
-    }
+//    long[] comb_init(int N) {
+//        long[] fact = new long[N];
+//        fact[0] = 1;
+//        for (int i = 1; i < N; i++) fact[i] = fact[i - 1] * i % mod;
+//        return fact;
+//    }
 
     // TLE https://codeforces.com/problemset/submission/622/171556225
     // reference: https://codeforces.com/contest/622/submission/15938350
     void solve(int n, int k) {
-        long[] fact = comb_init(k + 3);
+//         long[] fact = comb_init(k + 3);
+        long[] fact = new long[k + 3];
+        fact[0] = 1;
         long[] s = new long[k + 3];
         for (int i = 1; i <= k + 2; i++) {
             s[i] = (s[i - 1] + pow_mod(i, k)) % mod;
+            fact[i] = fact[i - 1] * i % mod;
         }
         if (n <= k + 2) {
             pr(s[n]);

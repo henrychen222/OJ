@@ -1,0 +1,31 @@
+---------- Arrays ----------
+https://docs.oracle.com/javase/1.5.0/docs/api/java/util/HashMap.html
+(no copyOf() copyOfRange())
+
+no Deque class
+
+---------- HashSet ----------
+https://docs.oracle.com/javase/1.5.0/docs/api/java/util/HashSet.html
+
+---------- TreeSet ----------
+https://docs.oracle.com/javase/1.5.0/docs/api/java/util/TreeSet.html
+(no lower() higher() floor() ceiling())
+
+---------- HashMap ----------
+https://docs.oracle.com/javase/1.5.0/docs/api/java/util/HashMap.html
+(no getOrDefault())
+
+---------- TreeMap ----------
+https://docs.oracle.com/javase/1.5.0/docs/api/java/util/TreeMap.html
+(no lowerKey() higherKey() floorKey() ceilingKey())
+
+
+---------- no abbreviation ----------
+TreeMap<String, Integer> res = new TreeMap<>(); // error Java 1.5 not allowed
+TreeMap<String, Integer> res = new TreeMap<String, Integer>();
+
+List<String> a = new ArrayList<>(); // error
+List<String> a = new ArrayList<String>();
+
+try
+catch (ArithmeticException | NullPointerException e) //  (| not allowed)

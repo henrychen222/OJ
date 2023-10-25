@@ -10,35 +10,21 @@ import java.io.*;
 class Main {
     static PrintWriter pw;
 
-    // Accepted
     void solve(int n, int k, int[] a) {
-        TreeMap<Integer, Integer> m = counter(a);
-        int[] u = removeDuplicatedSorted(a);
-        // tr(m, u);
-        for (int i = 1; i < u.length; i++) {
-            if (u[i] - u[i - 1] <= k) {
-                m.remove(u[i - 1]);
-            }
-        }
-        // tr(m);
-        long res = 0;
-        for (int occ : m.values()) res += occ;
-        pr(res);
-    }
-
-    int[] removeDuplicatedSorted(int[] a) {
-        TreeSet<Integer> ts = new TreeSet<>();
-        for (int x : a) ts.add(x);
-        int[] res = new int[ts.size()];
+        PriorityQueue<int[]> pq = new PriorityQueue<>((x, y) -> {
+            if (x[0] != y[0]) return y[0] - x[0];
+            return x[1] - y[1];
+        });
+        for (int i = 0; i < n; i++) pq.add(new int[]{a[i], i});
+        int[] res = new int[n];
         int p = 0;
-        for (int x : ts) res[p++] = x;
-        return res;
-    }
-
-    TreeMap<Integer, Integer> counter(int[] a) {
-        TreeMap<Integer, Integer> m = new TreeMap<>();
-        for (int x : a) m.put(x, m.getOrDefault(x, 0) + 1);
-        return m;
+        while (!pq.isEmpty()) {
+            int[] cur = pq.poll();
+            cur[0] -= k;
+            res[p++] = cur[1];
+            if (cur[0] > 0) pq.add(cur);
+        }
+        tr(res);
     }
 
     private void run() {
