@@ -1,5 +1,5 @@
 /**
- * 10/28/23 noon
+ * 10/28/23 noon 02/10/25 morning
  * https://www.luogu.com.cn/problem/P1123
  */
 package luogu.level3_yellow.P1123;
@@ -10,8 +10,14 @@ import java.io.*;
 class Main {
     static PrintWriter pw;
 
+    int tot;
+    long res;
+    Map<Integer, int[]> cors;
+
     void solve(int n, int m, int[][] g) {
-        Map<Integer, int[]> cors = new HashMap<>();
+        cors = new HashMap<>();
+        tot = n * m;
+        res = 0;
         TreeSet[] groups = new TreeSet[n * m];
         int p = 0;
         for (int i = 0; i < n; i++) {
@@ -22,61 +28,65 @@ class Main {
                 groups[p++] = ts;
             }
         }
-//        tr(groups, groups[0]);
-        for (int idx = 0; idx < groups.length; idx++) {
-            TreeSet<Integer> ts = groups[idx];
-            for (int x = 0; x < n; x++) {
-                for (int y = 0; y < m; y++) {
-                    // tr(g[i][j], g[x][y], Math.abs(i - x), Math.abs(j - y), valid(i, j, x, y));
-                    boolean ok = true;
-                    for (int curNode : ts) {
-                        int[] cor = cors.get(curNode);
-                        if (!valid(x, y, cor[0], cor[1])) {
-                            ok = false;
-                            break;
-                        }
-                    }
-                    if (ok) groups[idx].add(x * m + y);
-                }
+
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < m; j++) {
+                Deque<Integer> cur = new ArrayDeque<>();
+                Set<Integer> used = new HashSet<>();
+                cur.add(i * m + j);
+                used.add(i * m + j);
+                dfs(cur, used, g);
             }
         }
-        // tr(groups);
-        List<List<Integer>> groupVals = new ArrayList<>();
-        long res = 0;
-        for (int i = 0; i < groups.length; i++) {
-            List<Integer> tmp = new ArrayList<>();
-            TreeSet<Integer> ts = groups[i];
-            long sum = 0;
-            for (int node : ts) {
-                int[] cor = cors.get(node);
-                tmp.add(g[cor[0]][cor[1]]);
-                sum += g[cor[0]][cor[1]];
-            }
-            res = Math.max(res, sum);
-            groupVals.add(tmp);
-            // tr(sum);
-        }
-        tr("groups", groups);
-        tr("groupVals", groupVals);
         pr(res);
     }
 
+    void dfs(Deque<Integer> cur, Set<Integer> used, int[][] g) {
+        for (int i = 0; i < tot; i++) {
+            if (used.contains(i)) continue;
+            cur.push(i);
+            used.add(i);
+            tr("cur", cur, ok(cur));
+            if (ok(cur)) {
+                long sum = 0;
+                for(int node: cur) {
+                    int[] cor = cors.get(node);
+                    sum += g[cor[0]][cor[1]];
+                }
+                res = Math.max(res, sum);
+                dfs(cur, used, g);
+            }
+            int last = cur.pop();
+            used.remove(last);
+        }
+    }
+
+    boolean unique (Deque<Integer> cur) {
+        Set<Integer> se  = new HashSet<>();
+        for(int x: cur) se.add(x);
+        return cur.size() == se.size();
+    }
+
+    boolean ok(Deque<Integer> cur) {
+//        if (!unique(cur)) return false;
+        if (cur.size()>tot) return false;
+        if (cur.size() >= 2) {
+            int last = cur.getLast();
+            int[] lastCor = cors.get(last);
+            for (var node : cur) {
+                if (node != last) {
+                    int[] cor = cors.get(node);
+                    if (!valid(cor[0], cor[1], lastCor[0], lastCor[1])) return false;
+                }
+            }
+        }
+        return true;
+    }
+
+    // not next
     boolean valid(int i, int j, int x, int y) {
         return Math.abs(i - x) > 1 || Math.abs(j - y) > 1;
     }
-
-//    void union8NeighboursMatrix(int n, int m, int i, int j, DJSet ds) {
-//        int cur = i * m + j;
-//        if (i + 1 < n) ds.union(cur, (i + 1) * m + j);
-//        if (i - 1 >= 0) ds.union(cur, (i - 1) * m + j);
-//        if (j + 1 < m) ds.union(cur, i * m + j + 1);
-//        if (j - 1 >= 0) ds.union(cur, i * m + j - 1);
-//
-//        if (i + 1 < n && j + 1 < m) ds.union(cur, i * m + j + 1);
-//        if (i + 1 < n && j - 1 >= 0) ds.union(cur, i * m + j - 1);
-//        if (i - 1 >= 0 && j + 1 < m) ds.union(cur, (i - 1) * m + j + 1);
-//        if (i - 1 >= 0 && j - 1 >= 0) ds.union(cur, (i - 1) * m + j - 1);
-//    }
 
     private void run() {
         read_write_file(); // comment this before submission
