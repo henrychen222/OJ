@@ -1,18 +1,26 @@
 /**
- * 10/31/21 night created
- * 12/25/23 evening updated
+ * 03/30/24 morning
+ * https://www.acwing.com/problem/content/5564/
  */
-package codeforce;
+package acwing.y2024.r149.A;
 
 import java.util.*;
 import java.io.*;
 
-public class input_output_template {
+class Main {
     static PrintWriter pw;
 
+    // Accepted
+    void solve(int n, int[] a) {
+        pr(Arrays.stream(a).filter(x -> x == 1).count());
+    }
+
     private void run() {
-        read_write_file(); // keep this for input output problem
+        read_write_file(); // comment this before submission
         FastScanner fs = new FastScanner();
+        int n = fs.nextInt();
+        int[] a = fs.readArray(n);
+        solve(n, a);
     }
 
     private final String INPUT = "input.txt";
@@ -26,14 +34,13 @@ public class input_output_template {
             outstream = new PrintStream(new FileOutputStream(OUTPUT));
             System.setIn(instream);
             System.setOut(outstream);
-            pw = new PrintWriter(System.out); // running results should show in output.txt
         } catch (Exception e) {
         }
     }
 
     public static void main(String[] args) {
-        // pw = new PrintWriter(System.out);
-        new input_output_template().run();
+        pw = new PrintWriter(System.out);
+        new Main().run();
         pw.close();
     }
 

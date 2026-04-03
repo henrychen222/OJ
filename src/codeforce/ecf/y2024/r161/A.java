@@ -1,18 +1,44 @@
 /**
- * 10/31/21 night created
- * 12/25/23 evening updated
+ * 01/18/24 morning
+ * https://codeforces.com/contest/1922/problem/0
  */
-package codeforce;
+package codeforce.ecf.y2024.r161;
 
 import java.util.*;
 import java.io.*;
 
-public class input_output_template {
+public class A {
     static PrintWriter pw;
 
+    // Accepted
+    // reference: https://codeforces.com/blog/entry/124890
+    void solve(int n, char[] a, char[] b, char[] c) {
+        for(int i = 0; i < n; i++) {
+            if(a[i] != c[i] && b[i] != c[i]) {
+                pr("YES");
+                return;
+            }
+        }
+        pr("NO");
+    }
+
+    boolean isMatch(char c, char t) {
+        if (Character.isLowerCase(c)) {
+            return c == t;
+        } else {
+            return c != t;
+        }
+    }
+
     private void run() {
-        read_write_file(); // keep this for input output problem
+        read_write_file(); // comment this before submission
         FastScanner fs = new FastScanner();
+        int t = fs.nextInt();
+        while (t-- > 0) {
+            int n = fs.nextInt();
+            char[] a = fs.next().toCharArray(), b = fs.next().toCharArray(), c = fs.next().toCharArray();
+            solve(n, a, b, c);
+        }
     }
 
     private final String INPUT = "input.txt";
@@ -26,14 +52,13 @@ public class input_output_template {
             outstream = new PrintStream(new FileOutputStream(OUTPUT));
             System.setIn(instream);
             System.setOut(outstream);
-            pw = new PrintWriter(System.out); // running results should show in output.txt
         } catch (Exception e) {
         }
     }
 
     public static void main(String[] args) {
-        // pw = new PrintWriter(System.out);
-        new input_output_template().run();
+        pw = new PrintWriter(System.out);
+        new A().run();
         pw.close();
     }
 

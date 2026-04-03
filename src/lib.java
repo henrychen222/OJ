@@ -104,9 +104,6 @@ public class lib {
 
     int lower_bound2(int[] a, int x) {
         int idx = Arrays.binarySearch(a, x);
-        if (idx < 0) {
-            return -idx - 1;
-        }
-        return idx;
+        return idx < 0 ? -idx - 1 : idx;
     }
 }

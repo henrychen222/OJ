@@ -1,39 +1,61 @@
 /**
- * 10/31/21 night created
- * 12/25/23 evening updated
+ * 12/25/24 morning
+ * https://www.codechef.com/START166C/problems/BORROWBOOK
  */
-package codeforce;
+package codechef.contest.start.y2024.c166;
 
 import java.util.*;
 import java.io.*;
 
-public class input_output_template {
+class Chef_Land_Library {
     static PrintWriter pw;
 
-    private void run() {
-        read_write_file(); // keep this for input output problem
-        FastScanner fs = new FastScanner();
+    // Accepted
+    void solve(int[] a) {
+        Map<Integer, ArrayList<Integer>> m = counter_value_in_indexA_in(a);
+//        tr(m);
+        long res = 0;
+        for (int x : m.keySet()) {
+            int highest = m.get(x).getLast() + 1;
+            res += highest;
+        }
+        pr(res);
     }
 
-    private final String INPUT = "input.txt";
-    private final String OUTPUT = "output.txt";
+    Map<Integer, ArrayList<Integer>> counter_value_in_indexA_in(int[] a) {
+        Map<Integer, ArrayList<Integer>> m = new HashMap<>();
+        for (int i = 0; i < a.length; i++) m.computeIfAbsent(a[i], x -> new ArrayList<>()).add(i);
+        return m;
+    }
+
+    private void run() {
+        read_write_file();
+        FastScanner fs = new FastScanner();
+        int t = fs.nextInt();
+        while (t-- > 0) {
+            int n = fs.nextInt();
+            int[] a = fs.readArray(n);
+            solve(a);
+        }
+    }
 
     void read_write_file() {
         FileInputStream instream = null;
         PrintStream outstream = null;
         try {
+            String INPUT = "input.txt";
             instream = new FileInputStream(INPUT);
+            String OUTPUT = "output.txt";
             outstream = new PrintStream(new FileOutputStream(OUTPUT));
             System.setIn(instream);
             System.setOut(outstream);
-            pw = new PrintWriter(System.out); // running results should show in output.txt
-        } catch (Exception e) {
+        } catch (Exception ignored) {
         }
     }
 
     public static void main(String[] args) {
-        // pw = new PrintWriter(System.out);
-        new input_output_template().run();
+        pw = new PrintWriter(System.out);
+        new Chef_Land_Library().run();
         pw.close();
     }
 
@@ -41,7 +63,7 @@ public class input_output_template {
         pw.println(t);
     }
 
-    class FastScanner {
+    static class FastScanner {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         StringTokenizer st = new StringTokenizer("");
 
@@ -49,8 +71,7 @@ public class input_output_template {
             while (!st.hasMoreTokens())
                 try {
                     st = new StringTokenizer(br.readLine());
-                } catch (IOException e) {
-                    e.printStackTrace();
+                } catch (IOException ignored) {
                 }
             return st.nextToken();
         }
@@ -70,3 +91,4 @@ public class input_output_template {
         pw.println(Arrays.deepToString(o));
     }
 }
+
