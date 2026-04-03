@@ -6,3 +6,4 @@ package-lock.json
 /bin/
 *.sh
 input.txt
+/out/
