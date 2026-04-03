@@ -1,24 +1,33 @@
 /**
- * 02/09/22 afternoon
+ * 06/14/25 morning
+ * https://codeforces.com/problemset/problem/29/B
  */
+package codeforce.practice.L1500;
 
 import java.util.*;
 import java.io.*;
 
-class Template {
+public class B29 {
     static PrintWriter pw;
 
-    void solve() {
-
+    // Accepted --- https://codeforces.com/problemset/submission/29/324360792
+    void solve(int[] a) {
+        double toLightTime = (double) a[1] / a[2];
+        double lightToDesTime = (double) (a[0] - a[1]) / a[2];
+        int GreenRedRound = a[3] + a[4];
+        double rest = toLightTime % GreenRedRound;
+        double wait = 0;
+//        tr("GreenRedRound", GreenRedRound, "rest", rest);
+        if (rest >= a[3] && rest <= GreenRedRound) wait += GreenRedRound - rest;
+//        tr(toLightTime, lightToDesTime, wait);
+        pr(toLightTime + lightToDesTime + wait);
     }
 
     private void run() {
-        read_write_file(); // comment this before submission
+        read_write_file();
         FastScanner fs = new FastScanner();
-        int t = fs.nextInt();
-        while (t-- > 0) {
-            solve();
-        }
+        int[] a = fs.readArray(5);
+        solve(a);
     }
 
     void read_write_file() {
@@ -37,7 +46,7 @@ class Template {
 
     public static void main(String[] args) {
         pw = new PrintWriter(System.out);
-        new Template().run();
+        new B29().run();
         pw.close();
     }
 

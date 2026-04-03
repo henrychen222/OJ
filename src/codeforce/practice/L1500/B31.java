@@ -1,24 +1,57 @@
 /**
- * 02/09/22 afternoon
+ * 06/12/25 night
+ * https://codeforces.com/problemset/problem/31/B
  */
+package codeforce.practice.L1500;
 
 import java.util.*;
 import java.io.*;
 
-class Template {
+public class B31 {
     static PrintWriter pw;
 
-    void solve() {
-
+    // Accepted --- https://codeforces.com/problemset/submission/31/324226958
+    void solve(char[] s) {
+        List<String> d = new ArrayList<>();
+        StringBuilder sb = new StringBuilder(), res = new StringBuilder();
+        for (char c : s) { // cut by @
+            if (c == '@') {
+                d.add(sb.toString());
+                sb = new StringBuilder();
+            } else {
+                sb.append(c);
+            }
+        }
+        d.add(sb.toString());
+//        tr(d);
+        if (d.size() <= 1 || d.getFirst().isEmpty() || d.getLast().isEmpty()) {
+            pr("No solution");
+            return;
+        }
+        for (int i = 1; i < d.size() - 1; i++) {
+            if (d.get(i).length() < 2) {
+                pr("No solution");
+                return;
+            }
+        }
+        res.append(d.get(0));
+        for (int i = 1; i < d.size() - 1; i++) {
+            res.append("@");
+            res.append(d.get(i).charAt(0));
+            res.append(",");
+            res.append(d.get(i).substring(1));
+        }
+//        tr(res);
+        res.append("@");
+        res.append(d.getLast());
+        pr(res);
     }
 
     private void run() {
-        read_write_file(); // comment this before submission
+        read_write_file();
         FastScanner fs = new FastScanner();
-        int t = fs.nextInt();
-        while (t-- > 0) {
-            solve();
-        }
+        char[] s = fs.next().toCharArray();
+        solve(s);
     }
 
     void read_write_file() {
@@ -37,7 +70,7 @@ class Template {
 
     public static void main(String[] args) {
         pw = new PrintWriter(System.out);
-        new Template().run();
+        new B31().run();
         pw.close();
     }
 
