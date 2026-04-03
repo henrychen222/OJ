@@ -24,8 +24,8 @@ typedef long long ll;
 void run () {
 	int n;
 	cin >> n;
-	string s;
-	cin >> s;
+	vector<int> a(n);
+	for (int i = 0; i < n; i++) cin >> a[i];
 }
 
 void read_write_file () {
@@ -34,9 +34,9 @@ void read_write_file () {
 }
 
 int main () {
-	read_write_file();
+	read_write_file(); // comment before submission
 	ios::sync_with_stdio(false);
-	cin.tie(nullptr);
+	cin.tie(nullptr); // comment for interactive problem
 	int t;
 	cin >> t;
 	while (t--) run();
