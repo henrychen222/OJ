@@ -23,65 +23,25 @@ function readLine() {
 }
 
 /*
- * 04/05/23 afternoon
+ * 04/05/23 afternoon 05/08/26 afternoon
  * https://www.hackerrank.com/challenges/flipping-the-matrix/
  */
-
-const preSum = (a) => { let pre = [0]; for (let i = 0; i < a.length; i++) { pre.push(pre[i] + a[i]); } return pre; };
-const subArraySum = (a, l, r) => a[r + 1] - a[l];
-
-// bottowLeft quadrant -> bottowRight quadrant -> TopRight quadrant -> TopLeft quadrant
+// Accepted --- https://www.hackerrank.com/challenges/flipping-the-matrix/submissions/code/471703709
 function flippingMatrix(g) {
-    let n = g.length, m = g[0].length, preRow = g.map(a => preSum(a)), preCol = preSum2DCol(g), res = 0;
-    // pr(preRow)
-    // pr(preCol)
-    for (let i = n / 2; i < n; i++) {
-        let lsum = subArraySum(preRow[i], 0, m / 2 - 1), rsum = subArraySum(preRow[i], m / 2, m - 1);
-        if (lsum > rsum) g[i].reverse();
-    }
-    pr("step1", g);
-    preRow = g.map(a => preSum(a)), preCol = preSum2DCol(g);
-    for (let j = m / 2; j < m; j++) {
-        let upSum = subArraySum(preCol[j], 0, n / 2 - 1), downSum = subArraySum(preCol[j], n / 2, n - 1);
-        if (downSum > upSum) {
-            reverseCol(g, j);
+    let n = g.length;
+    let res = 0;
+    for (let i = 0; i < n >> 1; i++) {
+        for (let j = 0; j < n >> 1; j++) {
+            // 4 symmetric cells
+            const a = g[i][j];
+            const b = g[i][n - 1 - j];
+            const c = g[n - 1 - i][j];
+            const d = g[n - 1 - i][n - 1 - j];
+            res += Math.max(a, b, c, d);
         }
     }
-    pr("step2", g);
-    preRow = g.map(a => preSum(a)), preCol = preSum2DCol(g);
-    for (let i = 0; i < n / 2; i++) {
-        let lsum = subArraySum(preRow[i], 0, m / 2 - 1), rsum = subArraySum(preRow[i], m / 2, m - 1);
-        if (lsum < rsum) {
-            g[i].reverse();
-        }
-    }
-    pr("step3", g, cal(g));
+    return res;
 }
-
-
-const cal = (g) => {
-    let n =g.length, m =g[0].length, res = 0;
-    for (let i = 0; i < n / 2; i++) {
-        for (let j = 0; j < m / 2; j++) res += g[i][j];
-    }
-    return res;
-};
-
-const preSum2DCol = (g) => {
-    let n = g.length, m = g[0].length, res = [];
-    for (let j = 0; j < m; j++) {
-        let v = [];
-        for (let i = 0; i < n; i++) v.push(g[i][j]);
-        res.push(preSum(v));
-    }
-    return res;
-};
-
-const reverseCol = (g, col) => {
-    let n = g.length, v = [];
-    for (let i = 0; i < n; i++) v.push(g[i][col]);
-    for (let i = 0; i < n; i++) g[i][col] = v.pop();
-};
 
 const pr = console.log;
 

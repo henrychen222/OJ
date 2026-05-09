@@ -1,12 +1,9 @@
 /**
- * 02/08/22 evening
+ * 02/08/22 evening 05/08/26 afternoon
  * https://www.hackerrank.com/challenges/bomber-man/problem
  */
 
 'use strict';
-
-const { time } = require('console');
-const fs = require('fs');
 
 process.stdin.resume();
 process.stdin.setEncoding('utf-8');
@@ -38,118 +35,54 @@ function readLine() {
 
 const pr = console.log;
 
-const initialize2DArray = (n, m) => { let d = []; for (let i = 0; i < n; i++) { let t = Array(m).fill(0); d.push(t); } return d; };
+const allOBombGrid = (n, m) => [...Array(n)].map(() => Array(m).fill('O'));
 
-// 6/26 pass
-function bomberMan(after, g) {
-    let end = 1 + after;
-    g = g.map(a => a.split(""));
+// Accepted --- https://www.hackerrank.com/challenges/bomber-man/submissions/code/471704900
+function bomberMan(time, g) {
+    // pr(g)
+    g = g.map(a => a.split(""))
     let n = g.length, m = g[0].length;
-    let time = initialize2DArray(n, m);
-    // pr(g);
-    for (let t = 1; t <= end; t++) {
-        // pr(t, end)
-        if (t == 1) {
-            for (let i = 0; i < n; i++) {
-                for (let j = 0; j < m; j++) {
-                    if (g[i][j] == 'O') {
-                        time[i][j] = 2;
-                    }
-                }
-            }
-            // pr(t);
-            // debug(g)
-            continue;
-        }
-        if (t == 2) {
-            timePass(g, time);
-            // pr(t);
-            // debug(g)
-            continue;
-        }
-        if (t & 1) { // 3 5 7 9 ...
-            // pr(t, "plantBomb before");
-            plantBombAndTimePass(g, time);
-            // pr(t, "plantBomb after");
-            // debug(g)
-        } else { // 4 6 8 10 ...
-            // pr(t, "detonate before");
-            detonateAndTimePass(g, time)
-            // pr(t, "detonateAnd after");
-            // debug(g)
+    if (time == 1) {
+    } else if (time % 2 == 0) {
+        g = allOBombGrid(n, m);
+    } else {
+        g = detonateFromAllO(g); // explode once  // 1 5 9 13
+        if (time % 4 != 3) {
+            g = detonateFromAllO(g); // explode twice  3 7 11 15
         }
     }
-    debug(g);
+    outputG(g)
 }
 
-const debug = (g) => {
+const outputG = (g) => {
     let res = g.map(a => a.join(""));
     for (const e of res) pr(e);
 };
 
-const detonateAndTimePass = (g, time) => {
-    let n = g.length, m = g[0].length;
+const detonateFromAllO = (g) => {
+    let n = g.length, m = g[0].length, res = allOBombGrid(n, m);
     for (let i = 0; i < n; i++) {
         for (let j = 0; j < m; j++) {
             if (g[i][j] == 'O') {
-                // pr(i, j, time[i][j])
-                if (time[i][j] == 0) {
-                    // pr("bomb", i, j);
-                    g[i][j] = '.';
-                    time[i][j] = 0;
-                    // neighhour bomb, no relation time but has to reset neighbour time
-                    if (i + 1 < n) {
-                        g[i + 1][j] = '.';
-                        time[i + 1][j] = 0;
-                    }
-                    if (i - 1 >= 0) {
-                        g[i - 1][j] = '.';
-                        time[i - 1][j] = 0;
-                    }
-                    if (j + 1 < m) {
-                        g[i][j + 1] = '.';
-                        time[i][j + 1] = 0;
-                    }
-                    if (j - 1 >= 0) {
-                        g[i][j - 1] = '.';
-                        time[i][j - 1] = 0;
-                    }
-                } else if (time[i][j] > 0) {
-                    time[i][j]--;
+                res[i][j] = '.';
+                if (i + 1 < n) {
+                    res[i + 1][j] = '.';
                 }
-            } else {
-                time[i][j] = 0;
+                if (i - 1 >= 0) {
+                    res[i - 1][j] = '.';
+                }
+                if (j + 1 < m) {
+                    res[i][j + 1] = '.';
+                }
+                if (j - 1 >= 0) {
+                    res[i][j - 1] = '.';
+                }
             }
         }
     }
+    return res;
 };
 
-const timePass = (g, time) => {
-    let n = g.length, m = g[0].length;
-    for (let i = 0; i < n; i++) {
-        for (let j = 0; j < m; j++) {
-            if (g[i][j] == 'O') {
-                time[i][j]--;
-            } else {
-                time[i][j] = 0;
-            }
-        }
-    }
-};
-
-const plantBombAndTimePass = (g, time) => {
-    let n = g.length, m = g[0].length;
-    for (let i = 0; i < n; i++) {
-        for (let j = 0; j < m; j++) {
-            if (g[i][j] == 'O') {
-                time[i][j]--;
-            } else {
-                g[i][j] = 'O';
-                time[i][j] = 2;
-            }
-        }
-    }
-};
 
 function main() {
     // const ws = fs.createWriteStream(process.env.OUTPUT_PATH);
