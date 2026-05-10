@@ -1,59 +1,77 @@
 /**
- * 08/26/22 night
+ * 08/26/22 night 05/02/26 night
  * https://www.hackerrank.com/challenges/sherlock-and-valid-string/problem
  */
 package hackerrank.medium.s35;
 
 import java.util.*;
 import java.io.*;
-import java.util.concurrent.ConcurrentHashMap;
+import java.util.stream.Collectors;
 
+// Accepted --- https://www.hackerrank.com/challenges/sherlock-and-valid-string/submissions/code/471229510
 public class SherlockValidString {
     static PrintWriter pw;
 
-    // abcdefghhgfedecbae NO
+    /*
+    aabbc  YES
+     */
     void solve(char[] s) {
-        Map<Character, Integer> m = counter(s);
-        List<Integer> res = new ArrayList<>(m.values());
-        Map<Integer, Integer> m2 = counter2(res);
-        // tr(m, res, m2);
-        for (int x : m2.keySet()) {
-            addOneOrManyMap(m2, x - 1);
-            removeOneOrManyMap(m2, x);
-            // tr(m2);
-            if (m2.size() == 1) {
-                pr("YES");
-                return;
-            }
-            // withdraw
-            addOneOrManyMap(m2, x);
-            removeOneOrManyMap(m2, x - 1);
-        }
-        pr("NO");
-    }
-
-    Map<Character, Integer> counter(char[] s) {
         Map<Character, Integer> m = new HashMap<>();
-        for (char c : s) m.put(c, m.getOrDefault(c, 0) + 1);
-        return m;
+        for (char c : s) m.merge(c, 1, Integer::sum);
+        if (check(m)) {
+            pr("YES");
+            return;
+        }
+        m = sortMapByValueDec(m);
+//        tr(m);
+        char first = m.keySet().iterator().next();
+        // Case 1: Remove one occurrence from the most frequent character.
+        m.merge(first, -1, Integer::sum); // highest -1 all occurrence should be the same
+        if (check(m)) {
+            pr("YES");
+            return;
+        }
+        // Case 2: Remove one occurrence from the least frequent character(the char with frequency 1)
+        m.merge(first, 1, Integer::sum); // recover
+        m = sortMapByValueInc(m);
+//        tr(m);
+        char last = m.keySet().iterator().next();
+        removeOneOrManyMap(m, last); // should totally remove if it is zero occurrence
+        pr(check(m) ? "YES" : "NO");
     }
 
-    Map<Integer, Integer> counter2(List<Integer> a) {
-        Map<Integer, Integer> m = new ConcurrentHashMap<>();
-        for (int x : a) m.put(x, m.getOrDefault(x, 0) + 1);
-        return m;
+    boolean check(Map<Character, Integer> m) {
+        Map<Integer, Integer> cntMap = new HashMap<>();
+        for (int x : m.values()) cntMap.merge(x, 1, Integer::sum);
+        return cntMap.size() == 1;
     }
 
-    <T> void addOneOrManyMap(Map<T, Integer> m, T x, int... args) {
-        int cnt = args.length == 0 ? 1 : args[0];
-        m.put(x, m.getOrDefault(x, 0) + cnt);
+    Map<Character, Integer> sortMapByValueDec(Map<Character, Integer> map) {
+        return map.entrySet().stream()
+                .sorted(Map.Entry.comparingByValue(Comparator.reverseOrder()))
+                .collect(Collectors.toMap(
+                        Map.Entry::getKey,
+                        Map.Entry::getValue,
+                        (a, b) -> a,
+                        LinkedHashMap::new
+                ));
+    }
+
+    Map<Character, Integer> sortMapByValueInc(Map<Character, Integer> map) {
+        return map.entrySet().stream()
+                .sorted(Map.Entry.comparingByValue())
+                .collect(Collectors.toMap(
+                        Map.Entry::getKey,
+                        Map.Entry::getValue,
+                        (a, b) -> a,
+                        LinkedHashMap::new
+                ));
     }
 
     <T> void removeOneOrManyMap(Map<T, Integer> m, T x, int... args) {
-        int cnt = args.length == 0 ? 1 : args[0], occ = m.get(x);
-        if (occ > cnt) {
-            m.put(x, occ - cnt);
-        } else {
+        int cnt = args.length == 0 ? 1 : args[0];
+        m.merge(x, -cnt, Integer::sum);
+        if (m.get(x) == 0) {
             m.remove(x);
         }
     }
@@ -65,18 +83,17 @@ public class SherlockValidString {
         solve(s);
     }
 
-    private final String INPUT = "input.txt";
-    private final String OUTPUT = "output.txt";
-
     void read_write_file() {
         FileInputStream instream = null;
         PrintStream outstream = null;
         try {
+            String INPUT = "input.txt";
             instream = new FileInputStream(INPUT);
+            String OUTPUT = "output.txt";
             outstream = new PrintStream(new FileOutputStream(OUTPUT));
             System.setIn(instream);
             System.setOut(outstream);
-        } catch (Exception e) {
+        } catch (Exception ignore) {
         }
     }
 
@@ -90,7 +107,7 @@ public class SherlockValidString {
         pw.println(t);
     }
 
-    class FastScanner {
+    static class FastScanner {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         StringTokenizer st = new StringTokenizer("");
 
@@ -98,8 +115,7 @@ public class SherlockValidString {
             while (!st.hasMoreTokens())
                 try {
                     st = new StringTokenizer(br.readLine());
-                } catch (IOException e) {
-                    e.printStackTrace();
+                } catch (IOException ignore) {
                 }
             return st.nextToken();
         }

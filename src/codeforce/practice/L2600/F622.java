@@ -1,6 +1,9 @@
 /**
- * 09/09/22 evening
+ * 09/09/22 evening  05/02/26 morning
  * https://codeforces.com/problemset/problem/622/F
+ * reference:
+ * https://codeforces.com/contest/622/submission/15938350
+ * deepseek
  */
 package codeforce.practice.L2600;
 
@@ -11,51 +14,45 @@ public class F622 {
     static PrintWriter pw;
     final int mod = (int) 1e9 + 7;
 
-//    long[] comb_init(int N) {
-//        long[] fact = new long[N];
-//        fact[0] = 1;
-//        for (int i = 1; i < N; i++) fact[i] = fact[i - 1] * i % mod;
-//        return fact;
-//    }
-
-    // TLE https://codeforces.com/problemset/submission/622/171556225
-    // reference: https://codeforces.com/contest/622/submission/15938350
+    // Accepted --- https://codeforces.com/problemset/submission/622/373354085
     void solve(int n, int k) {
-//         long[] fact = comb_init(k + 3);
-        long[] fact = new long[k + 3];
+        int m = k + 2; // number of points needed
+        long[] fact = new long[m + 1];
+        long[] ifact = new long[m + 1];
         fact[0] = 1;
-        long[] s = new long[k + 3];
-        for (int i = 1; i <= k + 2; i++) {
+        long[] s = new long[m + 1];
+        for (int i = 1; i <= m; i++) {
             s[i] = (s[i - 1] + pow_mod(i, k)) % mod;
             fact[i] = fact[i - 1] * i % mod;
+        }
+        ifact[m] = pow_mod(fact[m], mod - 2);
+        for (int i = m - 1; i >= 0; i--) {
+            ifact[i] = ifact[i + 1] * (i + 1) % mod;
         }
         if (n <= k + 2) {
             pr(s[n]);
             return;
         }
-        long res = 0, c = 1;
-        for (int i = 0; i < k + 2; i++) c = c * (n - i) % mod;
-        for (int i = 0; i < k + 2; i++) {
-            long b = multi_mod(fact[i], fact[k + 1 - i]);
-            long rev2 = n - i;
-            if ((k + 1 - i) % 2 != 0) b = mod - b;
-            res += multi_mod(multi_mod(multi_mod(s[i], c), pow_mod(rev2, mod - 2)), pow_mod(b, mod - 2));
+
+        long[] pre = new long[m + 1]; // prefix products of (n - j) for j = 0..m-1
+        pre[0] = 1;
+        for (int i = 1; i <= m; i++) {
+            pre[i] = pre[i - 1] * ((n - i + mod) % mod) % mod;   // (n - i)
         }
-        pr(res % mod);
-    }
+        long[] suf = new long[m + 2]; // suffix products of (n - j) for j = m-1 down to 0
+        suf[m + 1] = 1;
+        for (int i = m; i >= 1; i--) {
+            suf[i] = suf[i + 1] * ((n - i + mod) % mod) % mod;
+        }
 
-    long multi_mod(long x, long y) {
-        return x * y % mod;
-    }
-
-    // TLE
-    void solve1(int n, int k) {
-        long pre = 1, res = 1;
-        for (int i = 1; i < n; i++) {
-            long p = pow_mod(i + 1, k);
-            // tr(i + 1, p);
-            res = (pre + p) % mod;
-            pre = res;
+        long res = 0;
+        for (int i = 1; i <= m; i++) {
+            long numerator = s[i] * pre[i - 1] % mod * suf[i + 1] % mod; // numerator = S[i] * ∏_{j≠i} (n - j)
+            long denominator = ifact[i - 1] * ifact[m - i] % mod;      // denominator = (i-1)! * (m-i)!
+            if ((m - i) % 2 == 1) {
+                numerator = mod - numerator;   // sign = (-1)^{m-i}
+            }
+            res = (res + numerator * denominator) % mod;
         }
         pr(res);
     }
@@ -77,18 +74,17 @@ public class F622 {
         solve(a[0], a[1]);
     }
 
-    private final String INPUT = "input.txt";
-    private final String OUTPUT = "output.txt";
-
     void read_write_file() {
         FileInputStream instream = null;
         PrintStream outstream = null;
         try {
+            String INPUT = "input.txt";
             instream = new FileInputStream(INPUT);
+            String OUTPUT = "output.txt";
             outstream = new PrintStream(new FileOutputStream(OUTPUT));
             System.setIn(instream);
             System.setOut(outstream);
-        } catch (Exception e) {
+        } catch (Exception ignore) {
         }
     }
 
@@ -102,17 +98,15 @@ public class F622 {
         pw.println(t);
     }
 
-    class FastScanner {
+    static class FastScanner {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         StringTokenizer st = new StringTokenizer("");
 
         String next() {
-            while (!st.hasMoreTokens())
-                try {
-                    st = new StringTokenizer(br.readLine());
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
+            while (!st.hasMoreTokens()) try {
+                st = new StringTokenizer(br.readLine());
+            } catch (IOException ignore) {
+            }
             return st.nextToken();
         }
 
