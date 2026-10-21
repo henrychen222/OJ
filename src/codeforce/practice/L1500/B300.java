@@ -10,7 +10,7 @@ import java.io.*;
 public class B300 {
     static PrintWriter pw;
 
-    // Accepted
+    // Accepted --- https://codeforces.com/problemset/submission/300/395303068
     // reference: https://codeforces.com/blog/entry/7497 + deepseek
     void solve(int n, int m, int[][] like) {
         DJSet ds = new DJSet(n);
